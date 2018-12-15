@@ -1,9 +1,6 @@
-# project
-_site
-.sass-cache
-.vagrant
-
-# general
+_site/
+.sass-cache/
+.jekyll-metadata
+_pdf
 .DS_Store
-Thumbs.db
-ehthumbs.db
+.idea
