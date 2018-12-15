@@ -70,11 +70,11 @@ author:
 # Uncomment the links you want to show in the footer and add your information to each link.
 # You can reorder the items to define the link order.
 # If you want to add a new link that isn't here, you'll need to also edit the file _data/SocialNetworks.yml
-social-network-links:
-  rss: false
-  email: "someone@example.com"
+#social-network-links:
+#  rss: false
+#  email: "someone@example.com"
 #  facebook: daattali
-  github: UnitedOperations
+#  github: UnitedOperations
 #  twitter: daattali
 #  reddit: yourname
 #  google-plus: +DeanAttali
@@ -162,14 +162,14 @@ defaults:
       type: "posts"
     values:
       layout: "post"
-      comments: true  # add comments to all blog posts
-      social-share: true # add social media sharing buttons to all blog posts
+      comments: false  # add comments to all blog posts
+      social-share: false # add social media sharing buttons to all blog posts
   -
     scope:
       path: "" # all files
     values:
       layout: "page"
-      show-avatar: true
+      show-avatar: false
 
 # Use tags index page and make tags on each post clickable
 link-tags: true
