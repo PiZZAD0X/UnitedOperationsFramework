@@ -6,7 +6,7 @@ class EGVAR(ACRE,UnitOptions) {
             property = QEGVAR(ACRE,UNITSETTINGS_Enable);
             displayName = "Enable ACRE Unit Settings";
             tooltip = "Enables Framework ACRE Settings on this unit";
-            control = "UO_FW_CheckBoxStatePlayerOnlyCategory";
+            control = QEGVAR(Core,CheckBoxStatePlayerOnlyCategory);
             expression = ENTITY_EXPRESSION;
             condition = "objectControllable";
             defaultValue = "false";

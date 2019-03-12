@@ -1,4 +1,4 @@
-class UO_FW_FrameworkCheckbox: Checkbox {
+class EGVAR(Core,FrameworkCheckbox): Checkbox {
     attributeLoad = QUOTE(\
         (_this controlsGroupCtrl 100) cbsetchecked _value;\
         if (_value) then {[] call EFUNC(3DEN,BasicSettings3Den);};\

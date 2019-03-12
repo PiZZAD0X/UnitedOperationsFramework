@@ -317,7 +317,7 @@ if (!(_this call FUNC(ValidateCaptureZone))) exitWith {
                                     };
                                     if !(_silent) then {
                                         if (_automessages) then {
-                                            private _msg = format ["%1 has captured %2!",EGVAR(Core,TeamName_Civilian),_zoneName];
+                                            private _msg = format ["%1 has captured %2!",EGVAR(Core,TeamName_Civ),_zoneName];
                                             _msg remoteExec ["hint"];
                                         } else {
                                             (_CIVmessageArray select 1) remoteExec ["hint"];
@@ -343,7 +343,7 @@ if (!(_this call FUNC(ValidateCaptureZone))) exitWith {
                             };
                             if !(_silent) then {
                                 if (_automessages) then {
-                                    private _msg = format ["%1 is capturing %2!",EGVAR(Core,TeamName_Civilian),_zoneName];
+                                    private _msg = format ["%1 is capturing %2!",EGVAR(Core,TeamName_Civ),_zoneName];
                                     _msg remoteExec ["hint"];
                                 } else {
                                     (_CIVmessageArray select 0) remoteExec ["hint"];

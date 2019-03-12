@@ -8,7 +8,7 @@ if (GETMVAR(Enabled_3,false)) then {
         if (GETMVAR(CasualtyCount_Enabled_BLUFOR_3,false)) then {_conditionsCountCategory3 = _conditionsCountCategory3 + 1;};
         if (GETMVAR(CasualtyCount_Enabled_OPFOR_3,false)) then {_conditionsCountCategory3 = _conditionsCountCategory3 + 1;};
         if (GETMVAR(CasualtyCount_Enabled_Indfor_3,false)) then {_conditionsCountCategory3 = _conditionsCountCategory3 + 1;};
-        if (GETMVAR(CasualtyCount_Enabled_Civilian_3,false)) then {_conditionsCountCategory3 = _conditionsCountCategory3 + 1;};
+        if (GETMVAR(CasualtyCount_Enabled_Civ_3,false)) then {_conditionsCountCategory3 = _conditionsCountCategory3 + 1;};
 
         if (!(GETMVAR(EntitiesAlive_Array_3,[]) isEqualto [])) then {_conditionsCountCategory3 = _conditionsCountCategory3 + 1;};
         if (!(GETMVAR(EntitiesDead_Array_3,[]) isEqualto [])) then {_conditionsCountCategory3 = _conditionsCountCategory3 + 1;};
@@ -57,12 +57,12 @@ if (GETMVAR(Enabled_3,false)) then {
                     _ConditionCheckList pushback ["Indfor Cas Check",_CasConditionCheck_Indfor];
                 };
 
-                private _CasConditionCheck_Civilian = false;
+                private _CasConditionCheck_Civ = false;
 
-                if (GETMVAR(CasualtyCount_Enabled_Civilian_3,false)) then {
-                    private _civCasualty = EGVAR(Core,TeamName_Civilian) call EFUNC(Core,CasualtyPercentage);
-                    if (_civCasualty >= GETMVAR(CasualtyCount_Enabled_Percentage_Civilian_3,75)) then {_CasConditionCheck_Civilian = true;} else {_CasConditionCheck_Civilian = false;};
-                    _ConditionCheckList pushback ["CIVILIAN Cas Check",_CasConditionCheck_Civilian];
+                if (GETMVAR(CasualtyCount_Enabled_Civ_3,false)) then {
+                    private _civCasualty = EGVAR(Core,TeamName_Civ) call EFUNC(Core,CasualtyPercentage);
+                    if (_civCasualty >= GETMVAR(CasualtyCount_Enabled_Percentage_Civ_3,75)) then {_CasConditionCheck_Civ = true;} else {_CasConditionCheck_Civ = false;};
+                    _ConditionCheckList pushback ["CIVILIAN Cas Check",_CasConditionCheck_Civ];
                 };
 
                 //alive entity block
@@ -212,7 +212,7 @@ if (GETMVAR(Enabled_3,false)) then {
 
                 //check block
                 if (GETMVAR(ExtractionEnabled_3,false)) then {
-                    private _team = ([EGVAR(Core,TeamName_Blufor),EGVAR(Core,TeamName_Opfor),EGVAR(Core,TeamName_Indfor),EGVAR(Core,TeamName_Civilian)] select GVAR(ExtractionTeam_3));
+                    private _team = ([EGVAR(Core,TeamName_Blufor),EGVAR(Core,TeamName_Opfor),EGVAR(Core,TeamName_Indfor),EGVAR(Core,TeamName_Civ)] select GVAR(ExtractionTeam_3));
                     if (GVAR(ExtractionMarker_3) isEqualto "") exitwith {["","No marker entered for extract zone for Category 3!"] call EFUNC(Debug,DebugMessageDetailed);};
                     if ((getMarkerColor GVAR(ExtractionMarker_3)) isEqualto "") exitwith {["","Invalid extract marker for Category 3!"] call EFUNC(Debug,DebugMessageDetailed);};
                         if ([_team,GVAR(ExtractionMarker_3),GVAR(ExtractionRatio_3)] call FUNC(hasExtracted)) then {
