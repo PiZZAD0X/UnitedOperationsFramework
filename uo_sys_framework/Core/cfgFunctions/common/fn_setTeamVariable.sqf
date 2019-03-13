@@ -1,7 +1,7 @@
 /*
  * Author: Olsen
  *
- * Changes value in UO_FW_Teams for set team.
+ * Changes value in EGVAR(Core,Teams) for set team.
  *
  * Arguments:
  * 0: Team name <string>

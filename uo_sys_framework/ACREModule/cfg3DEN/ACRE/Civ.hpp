@@ -6,7 +6,7 @@ class EGVAR(ACRE,RadioTypes_CAT_Civ) {
             property = QEGVAR(ACRE,SR_Type_Civ);
             displayName = "Short Range Radio Type";
             tooltip = "Sets the short range radio type for the side";
-            control = QEGVAR(Acre,SR_SELECT);
+            control = QEGVAR(ACRE,SR_SELECT);
             expression = SCENARIO_EXPRESSION;
             defaultValue = "0";
         };
@@ -14,7 +14,7 @@ class EGVAR(ACRE,RadioTypes_CAT_Civ) {
             property = QEGVAR(ACRE,LR_Type_Civ);
             displayName = "Long Range Radio Type";
             tooltip = "Sets the long range radio type for the side";
-            control = QEGVAR(Acre,LR_SELECT);
+            control = QEGVAR(ACRE,LR_SELECT);
             expression = SCENARIO_EXPRESSION;
             defaultValue = "0";
         };
@@ -22,14 +22,14 @@ class EGVAR(ACRE,RadioTypes_CAT_Civ) {
             property = QEGVAR(ACRE,PK_Type_Civ);
             displayName = "Long Range Pack Radio Type";
             tooltip = "Sets the long range pack radio type for the side";
-            control = QEGVAR(Acre,PK_SELECT);
+            control = QEGVAR(ACRE,PK_SELECT);
             expression = SCENARIO_EXPRESSION;
             defaultValue = "0";
         };
     };
 };
 
-class EGVAR(Acre,RADIONET_CAT_Civ) {
+class EGVAR(ACRE,RADIONET_CAT_Civ) {
     displayName = "Radio Net Configuration";
     collapsed = 0;
     class Attributes {
@@ -99,19 +99,19 @@ class EGVAR(Acre,RADIONET_CAT_Civ) {
     };
 };
 
-class EGVAR(Acre,BABEL_CAT_Civ) {
+class EGVAR(ACRE,BABEL_CAT_Civ) {
     displayName = "Babel Configuration";
     collapsed = 1;
     class Attributes {
         class EGVAR(ACRE,BABEL_Enabled_Civ) {
-            property = QEGVAR(Acre,Babel_Enabled_Civ);
+            property = QEGVAR(ACRE,Babel_Enabled_Civ);
             displayName = "Enable Babel Languages";
             control = "CheckBoxState";
             expression = SCENARIO_EXPRESSION;
             defaultValue = "false";
         };
         class EGVAR(ACRE,BABEL_EN_Civ) {
-            property = QEGVAR(Acre,Babel_EN_Civ);
+            property = QEGVAR(ACRE,Babel_EN_Civ);
             displayName = "English";
             tooltip = "Enables the language for this side";
             control = "CheckBox";
@@ -119,7 +119,7 @@ class EGVAR(Acre,BABEL_CAT_Civ) {
             defaultValue = "true";
         };
         class EGVAR(ACRE,BABEL_RU_Civ) {
-            property = QEGVAR(Acre,Babel_RU_Civ);
+            property = QEGVAR(ACRE,Babel_RU_Civ);
             displayName = "Russian";
             tooltip = "Enables the language for this side";
             control = "CheckBox";
@@ -127,7 +127,7 @@ class EGVAR(Acre,BABEL_CAT_Civ) {
             defaultValue = "false";
         };
         class EGVAR(ACRE,BABEL_FR_Civ) {
-            property = QEGVAR(Acre,Babel_FR_Civ);
+            property = QEGVAR(ACRE,Babel_FR_Civ);
             displayName = "French";
             tooltip = "Enables the language for this side";
             control = "CheckBox";
@@ -135,7 +135,7 @@ class EGVAR(Acre,BABEL_CAT_Civ) {
             defaultValue = "false";
         };
         class EGVAR(ACRE,BABEL_AR_Civ) {
-            property = QEGVAR(Acre,Babel_AR_Civ);
+            property = QEGVAR(ACRE,Babel_AR_Civ);
             displayName = "Arabic";
             tooltip = "Enables the language for this side";
             control = "CheckBox";
@@ -143,7 +143,7 @@ class EGVAR(Acre,BABEL_CAT_Civ) {
             defaultValue = "false";
         };
         class EGVAR(ACRE,BABEL_GK_Civ) {
-            property = QEGVAR(Acre,Babel_GK_Civ);
+            property = QEGVAR(ACRE,Babel_GK_Civ);
             displayName = "Greek";
             tooltip = "Enables the language for this side";
             control = "CheckBox";
@@ -151,7 +151,7 @@ class EGVAR(Acre,BABEL_CAT_Civ) {
             defaultValue = "false";
         };
         class EGVAR(ACRE,BABEL_Custom_Civ) {
-            property = QEGVAR(Acre,Babel_Custom_Civ);
+            property = QEGVAR(ACRE,Babel_Custom_Civ);
             displayName = "Custom Language";
             tooltip = "Define a custom language for this side";
             control = "EditShort";
@@ -159,7 +159,7 @@ class EGVAR(Acre,BABEL_CAT_Civ) {
             defaultValue = "''";
         };
         class EGVAR(ACRE,BABEL_Custom2_Civ) {
-            property = QEGVAR(Acre,Babel_Custom2_Civ);
+            property = QEGVAR(ACRE,Babel_Custom2_Civ);
             displayName = "Custom Language 2";
             tooltip = "Define a custom language for this side";
             control = "EditShort";

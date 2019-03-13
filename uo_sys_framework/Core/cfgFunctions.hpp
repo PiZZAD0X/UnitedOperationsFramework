@@ -64,6 +64,7 @@ CFGFUNCFOLDEREND;
 CFGFUNCFOLDERCORE(Attributes);
     CFGFUNC(3DEN,ImportFromProfileAttributeAttrLoad);
     CFGFUNC(3DEN,ImportLoadoutFromProfileAttributeAttrLoad);
+    CFGFUNC(Respawn,respawntemplates_attr_load);
 CFGFUNCFOLDEREND;
 
 CFGFUNCFOLDERCORE(Respawn);

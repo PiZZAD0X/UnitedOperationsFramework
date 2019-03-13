@@ -1,4 +1,4 @@
-class EGVAR(Acre,EarSetting): Title {
+class EGVAR(ACRE,EarSetting): Title {
     attributeLoad = "\
         private _unit = ((get3denselected 'object') select 0);\
         private _name = gettext (_config >> 'property');\

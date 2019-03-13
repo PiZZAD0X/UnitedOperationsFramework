@@ -1,4 +1,4 @@
-class EGVAR(Acre,SR_SELECT): Toolbox {
+class EGVAR(ACRE,SR_SELECT): Toolbox {
     attributeLoad ="\
         private _name = gettext (_config >> 'property');\
         missionNamespace setvariable [_name,_value];\
@@ -34,7 +34,7 @@ class EGVAR(Acre,SR_SELECT): Toolbox {
     };
 };
 
-class EGVAR(Acre,LR_SELECT): Toolbox {
+class EGVAR(ACRE,LR_SELECT): Toolbox {
     attributeLoad ="\
         private _name = gettext (_config >> 'property');\
         missionNamespace setvariable [_name,_value];\
@@ -70,7 +70,7 @@ class EGVAR(Acre,LR_SELECT): Toolbox {
     };
 };
 
-class EGVAR(Acre,PK_SELECT): Toolbox {
+class EGVAR(ACRE,PK_SELECT): Toolbox {
     attributeLoad ="\
         private _name = gettext (_config >> 'property');\
         missionNamespace setvariable [_name,_value];\

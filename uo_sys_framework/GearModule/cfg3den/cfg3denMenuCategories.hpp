@@ -72,7 +72,7 @@ class PREFIX##_Gear_ACE_Arsenal_LoadoutType_##TEAMNAME##_##SHORTNAME {\
     property = QUOTE(TRIPLES(PREFIX##_Gear_ACE_Arsenal_LoadoutType,TEAMNAME,SHORTNAME));\
     displayName = CSTRING_2(Gear_DisplayName,SHORTNAME);\
     tooltip = CSTRING_2(Gear_ToolTip_ACEAR,SHORTNAME);\
-    control = QUOTE(TRIPLES(PREFIX,Gear,LoadoutClassCombo));\
+    control = QUOTE(TRIPLES(PREFIX,Gear,ACE_Arsenal_LoadoutClassCombo));\
     typeName = QUOTE(STRING);\
     expression = SCENARIO_EXPRESSION;\
     defaultValue = QUOTE('NONE');\

@@ -10,6 +10,9 @@ LOG_1("Hostage set called on: %1!",_unit);
 private _marker = (GETVAR(_unit,Rescue_Location,"hostage_rescue"));
 _marker setMarkerAlpha 0;
 
+SETPVAR(_unit,IsUntied,false);
+SETPVAR(_unit,IsRescued,false);
+
 [{(CBA_missionTime > 0)},{
     params ["_unit","_marker"];
     [QEGVAR(Core,RegisterModuleEvent), ["Hostage Control", "Allows the mission maker to easily add hostages to their missions.", "Starfox64, TrainDoctor and PiZZADOX"]] call CBA_fnc_globalEventJiP;
@@ -28,7 +31,7 @@ _marker setMarkerAlpha 0;
     //IGNORE_PRIVATE_WARNING ["_thisID","_thisType"];
     private _EhAnimDone = [_unit, "AnimDone", {
         params ["_unit", "_anim"];
-        if ((!alive _unit) || (GETVAR(_unit,IsRescued,false))) exitWith {
+        if ((!alive _unit) || (GETVAR(_unit,IsRescued,false)) || (GETVAR(_unit,IsUntied,false))) exitWith {
             _unit removeEventHandler [_thisType, _thisID];
         };
         _unit playMoveNow "Acts_AidlPsitMstpSsurWnonDnon04";

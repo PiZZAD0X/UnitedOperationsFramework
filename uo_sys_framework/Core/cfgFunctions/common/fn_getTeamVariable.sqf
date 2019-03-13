@@ -1,7 +1,7 @@
 /*
  * Author: Olsen
  *
- * Retrieve variable for a set team from UO_FW_Teams.
+ * Retrieve variable for a set team from EGVAR(Core,Teams).
  *
  * Arguments:
  * 0: Team name <string>

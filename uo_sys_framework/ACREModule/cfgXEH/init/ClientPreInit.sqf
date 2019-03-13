@@ -10,7 +10,7 @@
 #define COMPONENT ACRE
 #include "\x\UO_FW\addons\Main\script_macros.hpp"
 EXEC_CHECK(CLIENT);
-if !(UO_FW_Server_AcreModule_Allowed) exitwith {};
+if !(UO_FW_Server_ACREModule_Allowed) exitwith {};
 
 #define RADIONETARRAY(TEAMNAME) \
 [(GETMVAR(RADIONET_NAME1##TEAMNAME,"")),(GETMVAR(RADIONET_NAME2##TEAMNAME,"")),(GETMVAR(RADIONET_NAME3##TEAMNAME,"")),(GETMVAR(RADIONET_NAME4##TEAMNAME,"")),(GETMVAR(RADIONET_NAME5##TEAMNAME,"")),(GETMVAR(RADIONET_NAME6##TEAMNAME,"")),(GETMVAR(RADIONET_NAME7##TEAMNAME,""))]
@@ -18,7 +18,7 @@ if !(UO_FW_Server_AcreModule_Allowed) exitwith {};
 [QGVAR(Init_Event), {
     if !(GETMVAR(Enabled,false)) exitwith {};
     if (!isDedicated && {hasinterface}) then {
-        [QEGVAR(Core,RegisterModuleEvent), ["ACRE Setup", "Module for Acre Settings", "PiZZADOX and Sacher"]] call CBA_fnc_localEvent;
+        [QEGVAR(Core,RegisterModuleEvent), ["ACRE Setup", "Module for ACRE Settings", "PiZZADOX and Sacher"]] call CBA_fnc_localEvent;
         GVAR(Preset) = ["default2", "default3", "default4", "default"];
         GVAR(Preset_BLUFOR) = "default";
         GVAR(Preset_OPFOR) = "default";
@@ -137,7 +137,7 @@ if !(UO_FW_Server_AcreModule_Allowed) exitwith {};
             };
 
             if (GETMVAR(SCRAMBLE_Enabled,false)) then {
-                LOG_1("Enabling Acre Scramble with %1",_presetTemp);
+                LOG_1("Enabling ACRE Scramble with %1",_presetTemp);
                 ["ACRE_PRC343", _presetTemp ] call acre_api_fnc_setPreset;
                 ["ACRE_PRC77", _presetTemp ] call acre_api_fnc_setPreset;
                 ["ACRE_PRC117F", _presetTemp ] call acre_api_fnc_setPreset;
@@ -168,7 +168,7 @@ if !(UO_FW_Server_AcreModule_Allowed) exitwith {};
                     private _index = _forEachIndex + 1;
                     _CURRENTBABEL_LANGUAGES pushBack ["cl" + (str _index),((missionNamespace getVariable [_x,""]))];
                 } forEach _names;
-                private _langInfo = format ["Acre Babel Lanugages: %1",_CURRENTBABEL_LANGUAGES];
+                private _langInfo = format ["ACRE Babel Lanugages: %1",_CURRENTBABEL_LANGUAGES];
                 LOG_1("%1",_langInfo);
                 {_x call acre_api_fnc_babelAddLanguageType;} foreach _CURRENTBABEL_LANGUAGES;
 

@@ -5,7 +5,7 @@ class EGVAR(TeamRespawnSettings,Blufor) {
         //_respawnTypeArray = [['1 Life','ONELIFE'],['Unlimited','UNLIMITED'],['Individual Tickets','INDTICKETS'],['Team Tickets','TEAMTICKETS'],['Wave','WAVE'],['Triggered','TRIGGERED']];
         class EGVAR(Respawn,Type_Blufor) {
             displayName = "Respawn System";
-            tooltip = "Type of respawn system for BLUFOR. Place down a GameLogic object with name UO_FW_RESPAWN_BLUFOR to define respawn location.";
+            tooltip = QUOTE(Type of respawn system for BLUFOR. Place down a GameLogic object with name MGVAR(RESPAWN_BLUFOR) to define respawn location.);
             control = QEGVAR(Respawn,Combo_Blufor);
             defaultValue = "0";
             property = QEGVAR(Respawn,Type_Blufor);

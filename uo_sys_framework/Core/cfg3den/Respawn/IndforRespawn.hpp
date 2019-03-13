@@ -4,7 +4,7 @@ class EGVAR(TeamRespawnSettings,Indfor) {
     class Attributes {
         class EGVAR(Respawn,Type_Indfor) {
             displayName = "Respawn System";
-            tooltip = "Type of respawn system for Indfor. Place down a GameLogic object with name UO_FW_RESPAWN_Indfor to define respawn location.";
+            tooltip =  QUOTE(Type of respawn system for BLUFOR. Place down a GameLogic object with name MGVAR(RESPAWN_INDFOR) to define respawn location.);
             control = QEGVAR(Respawn,Combo_Indfor);
             defaultValue = "0";
             property = QEGVAR(Respawn,Type_Indfor);
