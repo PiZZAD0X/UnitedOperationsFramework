@@ -37,12 +37,12 @@ if (_missionFrameworkVersionStr isEqualto "") then {
     INFO_1("Mission Updated with Framework Version:%1",_missionFrameworkVersion);
 };
 
-[QEGVAR(Core,EntityAttributeLoad), {
+[QGVAR(EntityAttributeLoad), {
     params ["_object", "_propertyName", "_value", ["_isGlobal",false,[false]]];
     _object setvariable [_propertyName,_value,_isGlobal];
 }] call CBA_fnc_addEventHandler;
 
-//[QEGVAR(Core,SettingsLoaded), {
+//[QGVAR(SettingsLoaded), {
 //    //_respawnTypeArray = [['1 Life','ONELIFE'],['Unlimited','UNLIMITED'],['Individual Tickets','INDTICKETS'],['Team Tickets','TEAMTICKETS']];
 //}] call CBA_fnc_addEventHandler;
 
@@ -58,7 +58,7 @@ if (_missionFrameworkVersionStr isEqualto "") then {
 }] call CBA_fnc_addEventHandler;
 
 if (!(hasInterface) || !(isMultiplayer)) then {
-    [QEGVAR(Core,EndmissionEvent), {
+    [QGVAR(EndmissionEvent), {
         params ["_scenario"];
         [QEGVAR(EndMission,LocalObjectsEvent), []] call CBA_fnc_localEvent;
     }] call CBA_fnc_addEventHandler;

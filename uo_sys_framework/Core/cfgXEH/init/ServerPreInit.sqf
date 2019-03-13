@@ -4,8 +4,8 @@ EXEC_CHECK(SERVER);
 
 LOG("Server Pre Init");
 
-[QEGVAR(Core,TeamsInitEvent), {
-    EGVAR(Core,Teams) = [];
+[QGVAR(TeamsInitEvent), {
+    GVAR(Teams) = [];
     {
         _x params ["_side","_namevar","_teamTypeNum"];
         private _teamType = ["player","ai","both"] select _teamTypeNum;
@@ -15,7 +15,7 @@ LOG("Server Pre Init");
     } foreach [[west,GVAR(TeamName_Blufor),GVAR(TeamType_Blufor)],[east,GVAR(TeamName_Opfor),GVAR(TeamType_Opfor)],[independent,GVAR(TeamName_Indfor),GVAR(TeamType_Indfor)],[civilian,GVAR(TeamName_Civ),GVAR(TeamType_Civ)]];
 }] call CBA_fnc_addEventHandler;
 
-[QEGVAR(Core,PlayerSpawned), {
+[QGVAR(PlayerSpawned), {
     _this call FUNC(EventPlayerSpawned);
 }] call CBA_fnc_addEventHandler;
 
@@ -23,29 +23,29 @@ LOG("Server Pre Init");
     params ["_unit"];
 }] call CBA_fnc_addEventHandler;
 
-[QEGVAR(Core,TrackAssetEvent), {
+[QGVAR(TrackAssetEvent), {
     params [["_asset", objNull, [objNull]],["_name", "", [""]],["_team", "", [""]]];
     private _asset = vehicle (_asset);
     SETPVAR(_asset,AssetName,_name);
     SETPVAR(_asset,AssetTeam,_team);
 }] call CBA_fnc_addEventHandler;
 
-[QEGVAR(Core,RespawnedEvent), {
+[QGVAR(RespawnedEvent), {
     LOG_1("started Respawned_Event with %1",_this);
     _this call FUNC(EventRespawned);
 }] call CBA_fnc_addEventHandler;
 
-[QEGVAR(Core,KilledEvent), {
+[QGVAR(KilledEvent), {
     LOG_1("started Killed_Event with %1",_this);
     _this call FUNC(EventKilled);
 }] call CBA_fnc_addEventHandler;
 
-[QEGVAR(Core,SpawnedEvent), {
+[QGVAR(SpawnedEvent), {
     LOG_1("started Spawned_Event with %1",_this);
     _this call FUNC(EventSpawned);
 }] call CBA_fnc_addEventHandler;
 
-[QEGVAR(Core,TrackEvent), {
+[QGVAR(TrackEvent), {
     params ["_unit"];
     if !(GETVAR(_unit,Tracked,false)) then {
         SETPVAR(_unit,Side,(side _unit));
@@ -53,12 +53,12 @@ LOG("Server Pre Init");
     };
 }] call CBA_fnc_addEventHandler;
 
-[QEGVAR(Core,DontTrackEvent), {
+[QGVAR(DontTrackEvent), {
     params ["_unit"];
     SETPVAR(_unit,DontTrack,true);
 }] call CBA_fnc_addEventHandler;
 
-[QEGVAR(Core,UnTrackEvent), {
+[QGVAR(UnTrackEvent), {
     params ["_unit"];
     if (GETVAR(_unit,Tracked,false)) then {
         {
@@ -69,13 +69,13 @@ LOG("Server Pre Init");
                     _x set [4, _current - 1];
                 };
             };
-        } forEach EGVAR(Core,Teams);
+        } forEach GVAR(Teams);
         SETPVAR(_unit,Side,nil);
         SETPVAR(_unit,Tracked,nil);
     };
 }] call CBA_fnc_addEventHandler;
 
-[QEGVAR(Core,TrackAllUnitsEvent), {
+[QGVAR(TrackAllUnitsEvent), {
     {
         if (!(GETVAR(_x,DontTrack,false))) then {
             _x call FUNC(TrackUnit);
@@ -83,7 +83,7 @@ LOG("Server Pre Init");
     } foreach allUnits;
 }] call CBA_fnc_addEventHandler;
 
-[QEGVAR(Core,RecievePlayerVarRequest), {
+[QGVAR(RecievePlayerVarRequest), {
     params ["_object","_clientID"];
     LOG_1("Var Request _object: %1",_object);
     LOG_1("Var Request _clientID: %1",_clientID);
@@ -95,10 +95,10 @@ LOG("Server Pre Init");
         _varArray pushback [_varstring,_value];
     } foreach _allUOVars;
     LOG_1("Var Request Array: %1",_varArray);
-    [QEGVAR(Core,RecievePlayerVars), [_object,_varArray], _object] call CBA_fnc_targetEvent;
+    [QGVAR(RecievePlayerVars), [_object,_varArray], _object] call CBA_fnc_targetEvent;
 }] call CBA_fnc_addEventHandler;
 
-[QEGVAR(Core,PlayerRespawnRequestTicketEvent), {
+[QGVAR(PlayerRespawnRequestTicketEvent), {
     params ["_unit","_ticketType"];
     LOG_2("RequestTicketEvent",_unit,_ticketType);
     switch (_ticketType) do {
@@ -125,9 +125,9 @@ LOG("Server Pre Init");
             if (_indTicketsRemaining > 0) then {
                 DEC(_indTicketsRemaining);
                 SETVAR(_unit,IndTicketsRemaining,_indTicketsRemaining);
-                [QEGVAR(Core,PlayerRespawnRecieveTicketEvent), [_unit,true,"IND",_indTicketsRemaining], [_unit]] call CBA_fnc_targetEvent;
+                [QGVAR(PlayerRespawnRecieveTicketEvent), [_unit,true,"IND",_indTicketsRemaining], [_unit]] call CBA_fnc_targetEvent;
             } else {
-                [QEGVAR(Core,PlayerRespawnRecieveTicketEvent), [_unit,false,"IND",_indTicketsRemaining], [_unit]] call CBA_fnc_targetEvent;
+                [QGVAR(PlayerRespawnRecieveTicketEvent), [_unit,false,"IND",_indTicketsRemaining], [_unit]] call CBA_fnc_targetEvent;
             };
         };
         case "TEAM": {
@@ -138,9 +138,9 @@ LOG("Server Pre Init");
                     if (_ticketsRemaining > 0) then {
                         DEC(_ticketsRemaining);
                         ESETMVAR(Respawn,TeamTicketsRemaining_Blufor,_ticketsRemaining);
-                        [QEGVAR(Core,PlayerRespawnRecieveTicketEvent), [_unit,true,"TEAM",_ticketsRemaining], [_unit]] call CBA_fnc_targetEvent;
+                        [QGVAR(PlayerRespawnRecieveTicketEvent), [_unit,true,"TEAM",_ticketsRemaining], [_unit]] call CBA_fnc_targetEvent;
                     } else {
-                        [QEGVAR(Core,PlayerRespawnRecieveTicketEvent), [_unit,false,"TEAM",_ticketsRemaining], [_unit]] call CBA_fnc_targetEvent;
+                        [QGVAR(PlayerRespawnRecieveTicketEvent), [_unit,false,"TEAM",_ticketsRemaining], [_unit]] call CBA_fnc_targetEvent;
                     };
                 };
                 case east: {
@@ -148,9 +148,9 @@ LOG("Server Pre Init");
                     if (_ticketsRemaining > 0) then {
                         DEC(_ticketsRemaining);
                         ESETMVAR(Respawn,TeamTicketsRemaining_Opfor,_ticketsRemaining);
-                        [QEGVAR(Core,PlayerRespawnRecieveTicketEvent), [_unit,true,"TEAM",_ticketsRemaining], [_unit]] call CBA_fnc_targetEvent;
+                        [QGVAR(PlayerRespawnRecieveTicketEvent), [_unit,true,"TEAM",_ticketsRemaining], [_unit]] call CBA_fnc_targetEvent;
                     } else {
-                        [QEGVAR(Core,PlayerRespawnRecieveTicketEvent), [_unit,false,"TEAM",_ticketsRemaining], [_unit]] call CBA_fnc_targetEvent;
+                        [QGVAR(PlayerRespawnRecieveTicketEvent), [_unit,false,"TEAM",_ticketsRemaining], [_unit]] call CBA_fnc_targetEvent;
                     };
                 };
                 case independent: {
@@ -158,9 +158,9 @@ LOG("Server Pre Init");
                     if (_ticketsRemaining > 0) then {
                         DEC(_ticketsRemaining);
                         ESETMVAR(Respawn,TeamTicketsRemaining_Indfor,_ticketsRemaining);
-                        [QEGVAR(Core,PlayerRespawnRecieveTicketEvent), [_unit,true,"TEAM",_ticketsRemaining], [_unit]] call CBA_fnc_targetEvent;
+                        [QGVAR(PlayerRespawnRecieveTicketEvent), [_unit,true,"TEAM",_ticketsRemaining], [_unit]] call CBA_fnc_targetEvent;
                     } else {
-                        [QEGVAR(Core,PlayerRespawnRecieveTicketEvent), [_unit,false,"TEAM",_ticketsRemaining], [_unit]] call CBA_fnc_targetEvent;
+                        [QGVAR(PlayerRespawnRecieveTicketEvent), [_unit,false,"TEAM",_ticketsRemaining], [_unit]] call CBA_fnc_targetEvent;
                     };
                 };
                 case civilian: {
@@ -168,9 +168,9 @@ LOG("Server Pre Init");
                     if (_ticketsRemaining > 0) then {
                         DEC(_ticketsRemaining);
                         ESETMVAR(Respawn,TeamTicketsRemaining_Civ,_ticketsRemaining);
-                        [QEGVAR(Core,PlayerRespawnRecieveTicketEvent), [_unit,true,"TEAM",_ticketsRemaining], [_unit]] call CBA_fnc_targetEvent;
+                        [QGVAR(PlayerRespawnRecieveTicketEvent), [_unit,true,"TEAM",_ticketsRemaining], [_unit]] call CBA_fnc_targetEvent;
                     } else {
-                        [QEGVAR(Core,PlayerRespawnRecieveTicketEvent), [_unit,false,"TEAM",_ticketsRemaining], [_unit]] call CBA_fnc_targetEvent;
+                        [QGVAR(PlayerRespawnRecieveTicketEvent), [_unit,false,"TEAM",_ticketsRemaining], [_unit]] call CBA_fnc_targetEvent;
                     };
                 };
                 default {};
@@ -179,8 +179,8 @@ LOG("Server Pre Init");
     };
 }] call CBA_fnc_addEventHandler;
 
-[QEGVAR(Core,PlayerRespawnAddToQueueEvent), {
+[QGVAR(PlayerRespawnAddToQueueEvent), {
     params ["_unit","_side","_timeadded","_gearclass","_originalGroup","_isLeader"];
 }] call CBA_fnc_addEventHandler;
 
-[QEGVAR(Core,TeamsInitEvent), []] call CBA_fnc_localEvent;
+[QGVAR(TeamsInitEvent), []] call CBA_fnc_localEvent;

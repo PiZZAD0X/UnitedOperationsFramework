@@ -4,7 +4,7 @@ EXEC_CHECK(CLIENT);
 
 LOG("Client Pre Init");
 
-[QEGVAR(Core,RecievePlayerVars), {
+[QGVAR(RecievePlayerVars), {
     params ["_playerUnit","_varArray"];
     LOG_1("Var Recieve _playerUnit: %1",_playerUnit);
     LOG_1("Var Recieve _varArray: %1",_varArray);
@@ -13,10 +13,10 @@ LOG("Client Pre Init");
         _x params ["_propertyName","_value"];
         player setvariable [_propertyName,_value];
     } foreach _varArray;
-    [QEGVAR(Core,SettingsLoaded), []] call CBA_fnc_localEvent;
+    [QGVAR(SettingsLoaded), []] call CBA_fnc_localEvent;
 }] call CBA_fnc_addEventHandler;
 
-[QEGVAR(Core,RegisterModuleEvent), {
+[QGVAR(RegisterModuleEvent), {
     if !(hasInterface) exitwith {};
     params ["_name", "_description", "_author"];
     [{!(isNull player)}, {
@@ -33,7 +33,7 @@ LOG("Client Pre Init");
     },[_name, _description, _author]] call CBA_fnc_WaitUntilAndExecute;
 }] call CBA_fnc_addEventHandler;
 
-[QEGVAR(Core,RegisterFrameworkEvent), {
+[QGVAR(RegisterFrameworkEvent), {
     if !(player diarySubjectExists QGVAR(Menu)) then {
         player createDiarySubject [QGVAR(Menu), "UO Framework"];
     };
@@ -50,7 +50,7 @@ LOG("Client Pre Init");
 
 [{!(isNull player)}, {
     LOG_1("Client call waituntil player: %1",player);
-    [QEGVAR(Core,RecievePlayerVarRequest), [player,clientOwner]] call CBA_fnc_serverEvent;
+    [QGVAR(RecievePlayerVarRequest), [player,clientOwner]] call CBA_fnc_serverEvent;
     SETMVAR(SpawnPos,(getpos player));
     switch (side player) do {
         case WEST: {SETMVAR(TeamTag,"BLUFOR");};
@@ -61,14 +61,14 @@ LOG("Client Pre Init");
     };
 }] call CBA_fnc_WaitUntilAndExecute;
 
-[QEGVAR(Core,EndMissionPlayerEvent), {
+[QGVAR(EndMissionPlayerEvent), {
     params ["_scenario"];
     [_scenario] call FUNC(EndScreen);
 }] call CBA_fnc_addEventHandler;
 
-[QEGVAR(Core,EndmissionEvent), {
+[QGVAR(EndmissionEvent), {
     params ["_scenario"];
-    [QEGVAR(Core,EndMissionPlayerEvent), [_scenario]] call CBA_fnc_localEvent;
+    [QGVAR(EndMissionPlayerEvent), [_scenario]] call CBA_fnc_localEvent;
 }] call CBA_fnc_addEventHandler;
 
 [QEGVAR(Spectator,StartSpectateEvent), {
@@ -79,10 +79,10 @@ LOG("Client Pre Init");
     [] call EFUNC(Spectator,endSpectate);
 }] call CBA_fnc_addEventHandler;
 
-[QEGVAR(Core,PlayerRespawnEvent), {
+[QGVAR(PlayerRespawnEvent), {
 }] call CBA_fnc_addEventHandler;
 
-[QEGVAR(Core,PlayerRespawnRecieveTicketEvent), {
+[QGVAR(PlayerRespawnRecieveTicketEvent), {
     params ["_unit","_response","_ticketType","_ticketsRemaining"];
     LOG_1("RecieveTicketEvent",_this);
     if !(local _unit) exitwith {};
@@ -106,7 +106,7 @@ LOG("Client Pre Init");
         switch (_ticketType) do {
             case "IND": {
                 if (_response) then {
-                    [QEGVAR(Core,PlayerRespawnEvent), []] call CBA_fnc_localEvent;
+                    [QGVAR(PlayerRespawnEvent), []] call CBA_fnc_localEvent;
                     if (_ticketsRemaining isEqualTo 0) exitwith {
                         "You have no respawn tickets remaining." call BIS_fnc_titleText;
                     };
@@ -122,7 +122,7 @@ LOG("Client Pre Init");
             };
             case "TEAM": {
                 if (_response) then {
-                    [QEGVAR(Core,PlayerRespawnEvent), []] call CBA_fnc_localEvent;
+                    [QGVAR(PlayerRespawnEvent), []] call CBA_fnc_localEvent;
                     if (_ticketsRemaining isEqualTo 0) exitwith {
                         "Your team has no respawn tickets remaining." call BIS_fnc_titleText;
                     };
@@ -140,7 +140,7 @@ LOG("Client Pre Init");
     }, [_response,_ticketType,_ticketsRemaining], (_delay + 3)] call CBA_fnc_WaitAndExecute;
 }] call CBA_fnc_addEventHandler;
 
-[QEGVAR(Core,PlayerInitEvent), {
+[QGVAR(PlayerInitEvent), {
     if (GETMVAR(ViewDistance_Enforce,false)) then {
         setViewDistance GETMVAR(ViewDistance,2500);
     };
@@ -153,13 +153,13 @@ LOG("Client Pre Init");
     player setvariable ["BIS_noCoreConversations",true,true];
 }] call CBA_fnc_addEventHandler;
 
-[QEGVAR(Core,PlayerInitEHEvent), {
+[QGVAR(PlayerInitEHEvent), {
     SETPLPVAR(Dead,false);
     SETPLPVAR(HasDied,false);
     SETPLPVAR(Spectating,false);
     SETPLPVAR(Body,player);
     GVAR(PlayerHitHandle) = [player, "Hit", FUNC(HitHandler), []] call CBA_fnc_addBISEventHandler;
-    [QEGVAR(Core,PlayerSpawned), player] call CBA_fnc_serverEvent;
+    [QGVAR(PlayerSpawned), player] call CBA_fnc_serverEvent;
 }] call CBA_fnc_addEventHandler;
 
 [QEGVAR(JiP,PlayerEvent), {
@@ -168,13 +168,13 @@ LOG("Client Pre Init");
         || (((EGETMVAR(JiP,Type_Indfor,0)) isEqualto 2) && {(side player isEqualto independent)})
         || (((EGETMVAR(JiP,Type_Civ,0)) isEqualto 2) && {(side player isEqualto civilian)})
     ) exitwith {
-        ["This mission does not support JIP for your team, enabling spectator"] call EFUNC(Core,parsedTextDisplay);
-        [QEGVAR(Core,UnTrackEvent), [player]] call CBA_fnc_serverEvent;
+        ["This mission does not support JIP for your team, enabling spectator"] call FUNC(parsedTextDisplay);
+        [QGVAR(UnTrackEvent), [player]] call CBA_fnc_serverEvent;
         [QEGVAR(Spectator,StartSpectateEvent), []] call CBA_fnc_localEvent;
         SETPLPVAR(JIPExcluded,true);
     };
     // Player can JiP, initialize player vars and EHs
-    [QEGVAR(Core,PlayerInitEHEvent), []] call CBA_fnc_localEvent;
-    [QEGVAR(Core,PlayerInitEvent), []] call CBA_fnc_localEvent;
+    [QGVAR(PlayerInitEHEvent), []] call CBA_fnc_localEvent;
+    [QGVAR(PlayerInitEvent), []] call CBA_fnc_localEvent;
     [] call EFUNC(JiP,GiveActions);
 }] call CBA_fnc_addEventHandler;

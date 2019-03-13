@@ -30,6 +30,6 @@ private _return = false;
         _x set [_index, _value];
         _return = true;
     };
-} forEach EGVAR(Core,Teams);
+} forEach GVAR(Teams);
 
 _return

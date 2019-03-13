@@ -3,4 +3,4 @@
 EXEC_CHECK(ALL);
 
 LOG("Spawned_Event called");
-[QEGVAR(Core,SpawnedEvent), _this] call CBA_fnc_serverEvent;
+[QGVAR(SpawnedEvent), _this] call CBA_fnc_serverEvent;

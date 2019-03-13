@@ -230,7 +230,7 @@ if (GETMVAR(Enabled_5,false)) then {
                             _x params ["_name","_value"];
                             if (_value) exitwith {
                                 LOG_1("Category 5 Ending due to :%1",_value);
-                                [GVAR(Message_5) ]call EFUNC(Core,EndMission);
+                                [GVAR(Message_5)] call EFUNC(Core,EndMission);
                                 [_idPFH] call CBA_fnc_removePerFrameHandler;
                             };
                         } foreach _ConditionCheckList;
