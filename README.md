@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://github.com/unitedoperations/UnitedOperationsFramework/releases">
-        <img src="https://img.shields.io/badge/Version-1.0.2-blue.svg" alt="Olsen Framework Version">
+        <img src="https://img.shields.io/badge/Version-1.0.4-blue.svg" alt="Olsen Framework Version">
     </a>
     <a href="https://github.com/unitedoperations/UnitedOperationsFramework/">
         <img src="https://img.shields.io/github/issues/UnitedOperations/UnitedOperationsFramework.svg" alt="Framework Issues">
