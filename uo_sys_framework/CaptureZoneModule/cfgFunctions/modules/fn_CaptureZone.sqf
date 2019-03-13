@@ -67,7 +67,7 @@ switch (_mode) do {
             private _silent = GETVAR(_logic,Silent,false);
             private _automessages = GETVAR(_logic,AutoMessages,false);
             private _cond = GETVAR(_logic,Condition,true);
-            [_logic,_zoneName,_area,_mode,_capArray,_timeArray,_messagesArray,_colours,_hidden,_silent,_automessages,_ratioNeeded,_cond] call FUNC(CaptureZoneLoop);
+            [_logic,_zoneName,_area,_mode,_capArray,_timeArray,_messagesArray,_colours,_hidden,_silent,_automessages,_ratioNeeded,_cond] call FUNC(Init);
         };
     };
     // When some attributes were changed (including position and rotation)

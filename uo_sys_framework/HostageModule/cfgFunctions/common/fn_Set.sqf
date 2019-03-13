@@ -1,7 +1,7 @@
 #define COMPONENT Hostage
 #include "\x\UO_FW\addons\Main\script_macros.hpp"
 EXEC_CHECK(ALL);
-if (!UO_FW_Server_HostageModule_Allowed) exitWith {};
+if !(UO_FW_Server_HostageModule_Allowed) exitWith {};
 
 params ["_unit"];
 

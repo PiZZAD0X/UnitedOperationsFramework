@@ -86,5 +86,6 @@ CFGFUNCFOLDEREND;
 CFGFUNCFOLDERCORE(Debug);
     CFGFUNC(Debug,debugMessage);
     CFGFUNC(Debug,debugMessageDetailed);
+    CFGFUNC(Debug,debugMessageDisplay);
     CFGFUNC(Debug,refreshDebug);
 CFGFUNCFOLDEREND;

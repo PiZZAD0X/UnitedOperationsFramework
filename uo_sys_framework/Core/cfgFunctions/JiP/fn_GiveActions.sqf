@@ -46,7 +46,7 @@ switch (_type) do {
             if (CBA_missionTime > (_startTime + ((GETMVAR(EXPIRETIME,(5))) * 60))) exitwith {
                 [player,1,["ACE_SelfActions","Jip_Teleport_Action"]] call ace_interact_menu_fnc_removeActionFromObject;
                 [_idPFH] call CBA_fnc_removePerFrameHandler;
-                ["JIP teleport option lost, it has been %1 minutes since you spawned.",(GETMVAR(EXPIRETIME,(5)))] call EFUNC(Core,parsedTextDisplay);
+                ["JIP teleport option lost, it has been %1 minutes since you spawned.",(GETMVAR(EXPIRETIME,5))] call EFUNC(Core,parsedTextDisplay);
             };
             if (player distance (MGETMVAR(SpawnPos,(getpos player))) > _distance) exitwith {
                 [player,1,["ACE_SelfActions","Jip_Teleport_Action"]] call ace_interact_menu_fnc_removeActionFromObject;

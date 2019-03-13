@@ -8,7 +8,7 @@ if (!UO_FW_Server_Framework_Allowed) exitWith {
     INFO("Framework is disabled in Server settings, exiting");
 };
 
-if !(EGETMVALUE(Core,Enabled,false)) exitWith {
+if !(GETMVALUE(Enabled,false)) exitWith {
     INFO("Framework is disabled in Mission settings... exiting");
 };
 
@@ -57,7 +57,12 @@ if (_missionFrameworkVersionStr isEqualto "") then {
     } foreach allUnits select {local _x};
 }] call CBA_fnc_addEventHandler;
 
-if (!(hasInterface) || !(isMultiplayer)) then {
+[QEGVAR(Debug,DebugMessageEvent), {
+    params ["_message"];
+    [_message] call EFUNC(Debug,debugMessageDisplay);
+}] call CBA_fnc_addEventHandler;
+
+if (!(hasInterface) || (isServer)) then {
     [QGVAR(EndmissionEvent), {
         params ["_scenario"];
         [QEGVAR(EndMission,LocalObjectsEvent), []] call CBA_fnc_localEvent;

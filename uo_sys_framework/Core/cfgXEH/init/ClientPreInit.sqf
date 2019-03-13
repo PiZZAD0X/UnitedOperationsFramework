@@ -44,7 +44,7 @@ LOG("Client Pre Init");
     Find out more about the framework on GitHub.<br/>
     github.com/unitedoperations/UnitedOperationsFramework<br/>
     <br/>
-    Current Version: #VERSION ";
+    Current Version: " + VERSIONSTR;
     player createDiaryRecord [QGVAR(Menu), ["Framework Info", _info]];
 }] call CBA_fnc_addEventHandler;
 

@@ -87,7 +87,7 @@ LOG("Server Pre Init");
     params ["_object","_clientID"];
     LOG_1("Var Request _object: %1",_object);
     LOG_1("Var Request _clientID: %1",_clientID);
-    private _allUOVars = (allVariables _object) select {!((toLower(str _x)) find QUOTE(PREFIX) isEqualto -1)};
+    private _allUOVars = (allVariables _object) select {!(((toLower(str _x)) find (toLower(QUOTE(PREFIX)))) isEqualto -1)};
     private _varArray = [];
     {
         private _varstring = _x;
