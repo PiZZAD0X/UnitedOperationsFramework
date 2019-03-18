@@ -86,16 +86,16 @@ class EGVAR(EndConditions,CasualtySettings_Category1) {
             validate = "number";
             defaultValue = "75";
         };
-        class EGVAR(EndConditions,CasualtyCount_Enabled_Civilian_1) {
-            property = QEGVAR(EndConditions,CasualtyCount_Enabled_Civilian_1);
+        class EGVAR(EndConditions,CasualtyCount_Enabled_Civ_1) {
+            property = QEGVAR(EndConditions,CasualtyCount_Enabled_Civ_1);
             displayName = "CIVILIAN Casualty";
             tooltip = "Enables casualty limit for this team";
             control = "CheckBox";
             expression = SCENARIO_EXPRESSION;
             defaultValue = "false";
         };
-        class EGVAR(EndConditions,CasualtyCount_Percentage_Civilian_1) {
-            property = QEGVAR(EndConditions,CasualtyCount_Percentage_Civilian_1);
+        class EGVAR(EndConditions,CasualtyCount_Percentage_Civ_1) {
+            property = QEGVAR(EndConditions,CasualtyCount_Percentage_Civ_1);
             displayName = "Casualty Percentage";
             tooltip = "End condition fires when team casualty percentage is over this number";
             control = QMGVAR(5To100Step5_Slider);
@@ -225,7 +225,7 @@ class EGVAR(EndConditions,CaptureZoneSettings_Category1) {
             tooltip = "Team that must activate the CaptureZones for the condition to fire.";
             control = QEGVAR(EndConditions,CaptureZoneTeam);
             expression = SCENARIO_EXPRESSION;
-            defaultValue = "1";
+            defaultValue = "0";
         };
     };
 };

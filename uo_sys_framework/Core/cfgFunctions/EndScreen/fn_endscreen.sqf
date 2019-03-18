@@ -4,8 +4,8 @@ EXEC_CHECK(CLIENT);
 
 params ["_scenario"];
 
-//player enableSimulation false;
-//removeAllWeapons player;
+player enableSimulation false;
+removeAllWeapons player;
 private _displayLayerNum = QGVAR(EndScreenLayer) cutRsc [QGVAR(endScreen), "PLAIN"];
 private _bg = 3000;
 private _endTitle = 3001;
@@ -40,7 +40,7 @@ private _textSide = 0;
             _rightText = _rightText + _temp;
         };
     };
-} forEach EGVAR(Core,Teams);
+} forEach GVAR(Teams);
 private _endTitleText = _scenario;
 if !((EGETMVAR(EndConditions,Timelimit,60)) isEqualto 0) then {
     private _time = ceil(CBA_missiontime / 60);
