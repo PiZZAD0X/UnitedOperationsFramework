@@ -1,5 +1,5 @@
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
 
 private ["_StartedInside"];
 private _dgn_returnvariable = false;
@@ -16,7 +16,7 @@ _Array = lineIntersectsObjs [_Position,[_Position select 0,_Position select 1,(_
 
 if (_dgn_returnvariable) then  {
     _StartedInside = true;
-    _this setVariable ["UO_FW_AI_StartedInside",true];
+    _this setVariable [QGVAR(StartedInside),true];
 } else {
     _StartedInside = false;
 };

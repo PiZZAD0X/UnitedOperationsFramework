@@ -1,3 +1,6 @@
+#include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
+AI_EXEC_CHECK(SERVERHC);
+
 //This function is to ensure the AI reaches their ammo objective!!!
 params ["_RAU","_RL"];
 

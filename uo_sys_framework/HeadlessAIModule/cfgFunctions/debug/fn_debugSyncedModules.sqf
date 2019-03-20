@@ -1,19 +1,13 @@
-/*    Description: Gets synced modules list and checks if correct modules linked.
- *    Displays error message in debug mode if wrong links exist.
- *     Arguments:
- *         OBJECT    - Module (name, _logic)
- *     Return Value:
- *         BOOL     - True
- */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
+
 params ["_logic"];
 private _Type = typeof _logic;
 private _synced = synchronizedObjects _logic;
 switch (_Type) do {
-    case "UO_FW_AI_ZoneModule_R";
-    case "UO_FW_AI_ZoneModule": {
-        private _AllowedLinks = ["UO_FW_AI_ControlModule","UO_FW_AI_ControlModule_R","UO_FW_AI_TaskModule","UO_FW_AI_PositionModule","UO_FW_AI_PositionModule_R","UO_FW_AI_RespawnModule","Group","Object","Vehicle"];
+    case QGVAR(ZoneModule_R);
+    case QGVAR(ZoneModule): {
+        private _AllowedLinks = [QGVAR(ControlModule),QGVAR(ControlModule_R),QGVAR(TaskModule),QGVAR(PositionModule),QGVAR(PositionModule_R),QGVAR(RespawnModule),"Group","Object","Vehicle"];
         {
             private _syncItem = _x;
             private _check = "";
@@ -43,8 +37,8 @@ switch (_Type) do {
             };
         } foreach _synced;
     };
-    case "UO_FW_AI_TaskModule": {
-        private _AllowedLinks = ["UO_FW_AI_ZoneModule","UO_FW_AI_ZoneModule_R","UO_FW_AI_TaskModule","Group"];
+    case QGVAR(TaskModule): {
+        private _AllowedLinks = [QGVAR(ZoneModule),QGVAR(ZoneModule_R),QGVAR(TaskModule),"Group"];
         {
             private _syncItem = _x;
             private _check = "";
@@ -64,9 +58,9 @@ switch (_Type) do {
             };
         } foreach _synced;
     };
-    case "UO_FW_AI_ControlModule_R";
-    case "UO_FW_AI_ControlModule": {
-        private _AllowedLinks = ["UO_FW_AI_ZoneModule","UO_FW_AI_ZoneModule_R","Group","Object","Vehicle"];
+    case QGVAR(ControlModule_R);
+    case QGVAR(ControlModule): {
+        private _AllowedLinks = [QGVAR(ZoneModule),QGVAR(ZoneModule_R),"Group","Object","Vehicle"];
         {
             private _syncItem = _x;
             private _check = "";
@@ -96,9 +90,9 @@ switch (_Type) do {
             };
         } foreach _synced;
     };
-    case "UO_FW_AI_PositionModule_R";
-    case "UO_FW_AI_PositionModule": {
-        private _AllowedLinks = ["UO_FW_AI_ZoneModule","UO_FW_AI_ZoneModule_R","UO_FW_AI_TemplateModule","Group","Object","Vehicle"];
+    case QGVAR(PositionModule_R);
+    case QGVAR(PositionModule): {
+        private _AllowedLinks = [QGVAR(ZoneModule),QGVAR(ZoneModule_R),QGVAR(TemplateModule),"Group","Object","Vehicle"];
         {
             private _syncItem = _x;
             private _check = "";
@@ -128,8 +122,8 @@ switch (_Type) do {
             };
         } foreach _synced;
     };
-    case "UO_FW_AI_TemplateModule": {
-        private _AllowedLinks = ["UO_FW_AI_PositionModule","UO_FW_AI_PositionModule_R","Group","Object","Vehicle"];
+    case QGVAR(TemplateModule): {
+        private _AllowedLinks = [QGVAR(PositionModule),QGVAR(PositionModule_R),"Group","Object","Vehicle"];
         {
             private _syncItem = _x;
             private _check = "";
@@ -159,8 +153,8 @@ switch (_Type) do {
             };
         } foreach _synced;
     };
-    case "UO_FW_AI_RespawnModule": {
-        private _AllowedLinks = ["UO_FW_AI_ZoneModule","UO_FW_AI_ZoneModule_R"];
+    case QGVAR(RespawnModule): {
+        private _AllowedLinks = [QGVAR(ZoneModule),QGVAR(ZoneModule_R)];
         {
             private _syncItem = _x;
             private _check = typeof _syncItem;

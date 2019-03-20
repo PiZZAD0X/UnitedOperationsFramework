@@ -1,6 +1,9 @@
+#include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
+AI_EXEC_CHECK(SERVERHC);
+
 params ["_Unit","_Group","",""];
 
-_Group setVariable ["UO_FW_AI_Mission","GARRISON"];
+_Group setVariable [QGVAR(Mission),"GARRISON"];
 _Group setvariable ["InitialWPSet",true];
 
 private _UnitLeader = _Unit;
@@ -21,8 +24,8 @@ if ((_nBuilding distance2D _UnitLeader) > 50) exitWith {};
 
 //Find the units in the group!
 private _GroupUnits = units _Group;
-_Unit setVariable ["UO_FW_AI_GARRISONED",true];
-_Group setVariable ["UO_FW_AI_GARRISONED",true];
+_Unit setVariable [QGVAR(GARRISONED),true];
+_Group setVariable [QGVAR(GARRISONED),true];
 private _WaypointIs = "HOLD";
 while {_WaypointIs isEqualTo "HOLD"} do {
     private _index = currentWaypoint _Group;

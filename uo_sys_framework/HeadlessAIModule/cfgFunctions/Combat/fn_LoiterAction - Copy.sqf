@@ -1,16 +1,19 @@
+#include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
+AI_EXEC_CHECK(SERVERHC);
+
 //This script will have the AI perform certain actions.
 private ["_Unit", "_UnitGroup", "_CurrentAction", "_RandomAction", "_rnd", "_dist", "_dir", "_UnitPosition", "_positions", "_RandomAnimationList", "_ClosestUnit", "_positions2", "_Fire"];
 params ["_Unit","_UnitGroup"];
 
-While {_Unit getVariable ["UO_FW_AI_LOITERING",true] && alive _Unit} do {
-    _CurrentAction = _Unit getVariable ["UO_FW_AI_LOITERINGACT",0];
+While {_Unit getVariable [QGVAR(LOITERING),true] && alive _Unit} do {
+    _CurrentAction = _Unit getVariable [QGVAR(LOITERINGACT),0];
 
     _RandomAction = ([1,2,3,4] - [_CurrentAction]) call BIS_fnc_selectrandom;
     switch (_RandomAction) do {
             case 1: {
                 //Wander around and play random animation
                 //Get random position
-                _Unit setVariable ["UO_FW_AI_LOITERINGACT",1];
+                _Unit setVariable [QGVAR(LOITERINGACT),1];
                 _rnd = random 10;
                 _dist = (_rnd + 5);
                 _dir = random 360;
@@ -22,9 +25,9 @@ While {_Unit getVariable ["UO_FW_AI_LOITERING",true] && alive _Unit} do {
                 [_Unit,_RandomAnimationList] remoteExec ["playMoveEverywhere",0];
             };
             case 2: {
-                _Unit setVariable ["UO_FW_AI_LOITERINGACT",2];
-                _ClosestUnit = [(_UnitGroup - [_Unit]),_Unit] call EFUNC(AI,ClosestObject);
-                _ClosestUnit setVariable ["UO_FW_AI_LOITERINGACT",2];
+                _Unit setVariable [QGVAR(LOITERINGACT),2];
+                _ClosestUnit = [(_UnitGroup - [_Unit]),_Unit] call FUNC(ClosestObject);
+                _ClosestUnit setVariable [QGVAR(LOITERINGACT),2];
 
                 _rnd = random 10;
                 _dist = (_rnd + 5);
@@ -56,9 +59,9 @@ While {_Unit getVariable ["UO_FW_AI_LOITERING",true] && alive _Unit} do {
 
             };
             case 3: {
-                _Unit setVariable ["UO_FW_AI_LOITERINGACT",3];
-                _ClosestUnit = [(_UnitGroup - [_Unit]),_Unit] call EFUNC(AI,ClosestObject);
-                _ClosestUnit setVariable ["UO_FW_AI_LOITERINGACT",3];
+                _Unit setVariable [QGVAR(LOITERINGACT),3];
+                _ClosestUnit = [(_UnitGroup - [_Unit]),_Unit] call FUNC(ClosestObject);
+                _ClosestUnit setVariable [QGVAR(LOITERINGACT),3];
 
                 _rnd = random 10;
                 _dist = (_rnd + 5);
@@ -123,7 +126,7 @@ While {_Unit getVariable ["UO_FW_AI_LOITERING",true] && alive _Unit} do {
             case 4: {
                 //Wander around and sitdown
                 //Get random position
-                _Unit setVariable ["UO_FW_AI_LOITERINGACT",4];
+                _Unit setVariable [QGVAR(LOITERINGACT),4];
                 _rnd = random 10;
                 _dist = (_rnd + 5);
                 _dir = random 360;

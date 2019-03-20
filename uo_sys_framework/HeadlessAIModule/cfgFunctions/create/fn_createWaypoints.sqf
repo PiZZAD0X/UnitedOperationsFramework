@@ -1,13 +1,5 @@
-/*    Recreates Waypoints for units that had Waypoints.
- *     Arguments:
- *         GROUP    - Group to Create Waypoints For
- *         ARRAY    - Waypoint Details and Settings
- *     Return Value:
- *         BOOL    - True
- *
- */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
 
 params ["_grp",["_waypoints",[],[[]]]];
 {

@@ -1,9 +1,6 @@
-/*    Description: Gets synced group to a module.
- *    Arguments:
- *         OBJECT    - Module
- *     Return Value:
- *         GROUP     - Synchronised Groups
- */
+#include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
+AI_EXEC_CHECK(SERVERHC);
+
 params [["_logic",objNull,[objNull]],["_grp",[],[[]]],["_syncedUnits",[],[[]]],["_syncedGroups",[],[[]]]];
 if (!isNull _logic) then {
     private _synced = synchronizedObjects _logic;

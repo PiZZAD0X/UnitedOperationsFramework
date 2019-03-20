@@ -1,3 +1,6 @@
+#include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
+AI_EXEC_CHECK(SERVERHC);
+
 //unit 1, unit 2
 params ["_unit","_target"];
 

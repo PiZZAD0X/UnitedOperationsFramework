@@ -1,16 +1,6 @@
-/*    Description: Set the building or buildings for the group to occupy.
- *     Arguments:
- *         NUMBER    - Occupy Option
- *         NUMBER    - Count
- *         ARRAY    - Radius to get buildings from.
- *         ARRAY    - Occupy Option
- *     Return Value:
- *         ARRAY     - POSITION, BUILDING
- *    Author
- *        suits & PiZZADOX
- */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
+
 params ["_occupyOption","_i",["_bld",[],[[]]],["_bldPos",[],[[]]],["_pos",[],[[]]],["_return",[],[[]]]];
 private ["_uBld"];
 switch (_occupyOption) do {

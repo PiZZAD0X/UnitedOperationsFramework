@@ -25,7 +25,7 @@ class CfgFactionClasses {
     class MGVAR(FrameworkCategory): NO_CATEGORY {
         displayName = " United Operations Framework";
     };
-    //#include "HeadlessAIModule\cfgFactionClasses.hpp"
+    #include "HeadlessAIModule\cfgFactionClasses.hpp"
 };
 
 class CfgFunctions {
@@ -45,12 +45,12 @@ class CfgFunctions {
 		#include "CaptureZoneModule\cfgFunctions.hpp"
 		#include "StartInParachuteModule\cfgFunctions.hpp"
 		//#include "FiremissionModule\cfgFunctions.hpp"
+        #include "HeadlessAIModule\cfgFunctions.hpp"
 		#include "HostageModule\cfgFunctions.hpp"
 		#include "CoverMapModule\cfgFunctions.hpp"
 		#include "MapAndCompassRemoverModule\cfgFunctions.hpp"
 	};
 	//Add Custom Function Categories with a Different Tag
-	//#include "HeadlessAIModule\cfgFunctions.hpp"
 };
 
 class CfgVehicles {
@@ -81,7 +81,7 @@ class CfgVehicles {
         editorSubCategory = QMGVAR(SubCategory);
     };
     //add custom cfgVehicles
-    //#include "HeadlessAIModule\cfgVehicles.hpp"
+    #include "HeadlessAIModule\cfgVehicles.hpp"
     #include "SetupTimerModule\cfgVehicles.hpp"
     #include "CaptureZoneModule\cfgVehicles.hpp"
     #include "AOLimitModule\cfgVehicles.hpp"
@@ -161,20 +161,20 @@ class Cfg3DEN {
         #include "GearModule\cfg3den\cfg3denMenuCategories.hpp"
         //Add Custom Mission 3DEN Editor Categories
         #include "BriefingModule\cfg3den\cfg3denMenuCategories.hpp"
-        //#include "HeadlessAIModule\cfg3den\cfg3denMenuCategories.hpp"
+        #include "HeadlessAIModule\cfg3den\cfg3denMenuCategories.hpp"
         #include "ACREModule\cfg3den\cfg3denMenuCategories.hpp"
     };
 
     //Add Custom Base 3DEN Options & Categories
     class Group {
         class AttributeCategories {
-            //#include "HeadlessAIModule\cfgAttributeCategories\Group.hpp"
+            #include "HeadlessAIModule\cfgAttributeCategories\Group.hpp"
         };
     };
 
     class Object {
         class AttributeCategories {
-            //#include "HeadlessAIModule\cfgAttributeCategories\Object.hpp"
+            #include "HeadlessAIModule\cfgAttributeCategories\Object.hpp"
             #include "TeamColourModule\cfgAttributeCategories\Object.hpp"
             #include "GearModule\cfgAttributeCategories\Object.hpp"
             #include "ACREModule\cfgAttributeCategories\Object.hpp"
@@ -226,14 +226,14 @@ class Cfg3DEN {
         };
 
         class AttributeCategories {
-            //#include "HeadlessAIModule\cfgAttributeCategories\Logic.hpp"
+            #include "HeadlessAIModule\cfgAttributeCategories\Logic.hpp"
         };
     };
 
     //Add Custom Configs & Controls for 3DEN and Modules
     class Attributes {
         #include "Core\CfgAttributes.hpp"
-        //#include "HeadlessAIModule\CfgAttributes.hpp"
+        #include "HeadlessAIModule\CfgAttributes.hpp"
         #include "TeamColourModule\CfgAttributes.hpp"
         #include "CaptureZoneModule\CfgAttributes.hpp"
         #include "StartInParachuteModule\CfgAttributes.hpp"
@@ -253,26 +253,18 @@ class display3DEN {
                 #include "Core\display3DEN\MenuEndConditions.hpp"
                 #include "Core\display3DEN\MenuRespawn.hpp"
                 //Add Custom UO Menus
-                //#include "HeadlessAIModule\display3DEN\Menu.hpp"
+                #include "HeadlessAIModule\display3DEN\Menu.hpp"
                 #include "BriefingModule\display3DEN\Menu.hpp"
                 #include "GearModule\display3DEN\Menu.hpp"
                 #include "ACREModule\display3DEN\Menu.hpp"
                 //Tools Define
                 #include "Core\display3DEN\Menu3DEN.hpp"
                 #include "Core\display3DEN\MenuTools.hpp"
-                //Add Custom Tools Menus
-                /*class EGVAR(Tools,Folder) {
-                    text = "Tools";
-                    items[] = {
-                        EGVAR(Tools,Test_Mission),
-                        EGVAR(Tools,Test_Loadouts)
-                    };
-                };*/
                 //Documentation Define
                 #include "Core\display3DEN\MenuDoc.hpp"
                 //Compile UO Menu Folder
                 //Add Custom Items with an Additional Entry in Items[]
-                class MGVAR(Folder) {
+                class EGVAR(Core,Folder) {
                     text = "UO Framework";
                     //items[] = {
                     //    QMGVAR(Settings),
@@ -284,7 +276,8 @@ class display3DEN {
                     //    QEGVAR(Gear,Folder),
                     //    QEGVAR(AI,Settings),
                     //    QEGVAR(ExportImport,Folder),
-                    //    QMGVAR(Documentation)
+                    //    QEGVAR(Core,Documentation),
+                    //    QEGVAR(Core,VersionDisplay)
                     //};
                     items[] = {
                         QEGVAR(Core,SettingsMenu),
@@ -294,12 +287,14 @@ class display3DEN {
                         QEGVAR(EndConditions,Folder),
                         QEGVAR(ACRE,Folder),
                         QEGVAR(Gear,Folder),
+                        QEGVAR(AI,Settings),
                         QEGVAR(ExportImport,Folder),
-                        QEGVAR(Core,Documentation)
+                        QEGVAR(Core,Documentation),
+                        QEGVAR(Core,VersionDisplay)
                     };
                 };
                 //Compile Main Menu
-                items[] += {QMGVAR(Folder)};
+                items[] += {QEGVAR(Core,Folder)};
             };
         };
     };
@@ -337,7 +332,7 @@ class Extended_PreInit_EventHandlers {
 	#include "AIDriversModule\cfgXEH\PreInit.hpp"
 	#include "AILinkModule\cfgXEH\PreInit.hpp"
 	#include "HostageModule\cfgXEH\PreInit.hpp"
-	//#include "HeadlessAIModule\cfgXEH\PreInit.hpp"
+	#include "HeadlessAIModule\cfgXEH\PreInit.hpp"
 };
 
 class Extended_PostInit_Eventhandlers {
@@ -354,7 +349,7 @@ class Extended_InitPost_Eventhandlers {
         #include "Core\cfgXEH\InitPost.hpp"
         #include "ShotCountModule\cfgXEH\InitPost.hpp"
         #include "HostageModule\cfgXEH\InitPost.hpp"
-        //#include "HeadlessAIModule\cfgXEH\InitPost.hpp"
+        #include "HeadlessAIModule\cfgXEH\InitPost.hpp"
         #include "MapAndCompassRemoverModule\cfgXEH\InitPost.hpp"
     };
     class LandVehicle {

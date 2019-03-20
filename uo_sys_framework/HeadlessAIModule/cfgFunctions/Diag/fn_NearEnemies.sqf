@@ -1,5 +1,5 @@
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
 
 params ["_unit"];
 
@@ -10,8 +10,8 @@ private _Array1 = [];
     if ([_UnitSide, _TargetSide] call BIS_fnc_sideIsEnemy) then {_Array1 pushback _x;};
 } forEach allUnits;
 
-private _ReturnedEnemy = [_Array1,_Unit] call EFUNC(AI,ClosestObject);
+private _ReturnedEnemy = [_Array1,_Unit] call FUNC(ClosestObject);
 if (isNil "_ReturnedEnemy") then {_ReturnedEnemy = [0,0,0]};
 
-//_Unit setVariable ["UO_FW_AI_CLOSESTEnemy",_ReturnedEnemy,false];
+//_Unit setVariable [QGVAR(CLOSESTEnemy),_ReturnedEnemy,false];
 _ReturnedEnemy

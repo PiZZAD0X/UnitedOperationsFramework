@@ -1,29 +1,5 @@
-/*    Description: Task a group to patrol a box around their patrol position.
-*     Arguments:
-*         GROUP    - Group
-*     Optional:
-*         ARRAY    - Task Position
-*         NUMBER    - Task Radius
-*         NUMBER    - Wait Time at Waypoints
-*         STRING    - Behaviour
-*         STRING    - CombatMode
-*         STRING    - Speed
-*         STRING    - Formation
-*         STRING    - Waypoint Type
-*         STRING    - On Waypoint Complete Statement
-*         NUMBER    - Waypoint Complete Radius
-*        NUMBER    - Required Waypoint Amount
-*     Return Value:
-*         BOOL     - True
-*    Author:
-*        Rommel
-*    Modified
-*        suits & PiZZADOX
-*/
-
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
-
+AI_EXEC_CHECK(SERVERHC);
 
 params [
     "_grp",
@@ -35,7 +11,7 @@ params [
     ["_speed","LIMITED",[""]],
     ["_formation","WEDGE",[""]],
     ["_Type","MOVE",[""]],
-    ["_oncomplete","this call EFUNC(AI,taskSearchNearby)",[""]],
+    ["_oncomplete","this call FUNC(taskSearchNearby)",[""]],
     ["_compradius",0,[0]],
     ["_wpcount",10,[0]],
     "_i"
@@ -55,14 +31,14 @@ _poswp3 = _poswp4 vectorAdd _forwards;
     _this1 =+ _this;
     _this1 set [1,_x];
     _this1 set [2,0];
-    _this1 call EFUNC(AI,createWaypoint);
+    _this1 call FUNC(createWaypoint);
 } foreach [_poswp1,_poswp2,_poswp3,_poswp4];
 _this2 =+ _this;
 _this2 set [1,_poswp1];
 _this2 set [2,0];
 _this2 set [8, "CYCLE"];
-_this2 call EFUNC(AI,createWaypoint);
+_this2 call FUNC(createWaypoint);
 deleteWaypoint ((waypoints _grp) select 0);
 _grp setvariable ["InitialWPSet",true];
-_grp setVariable ["UO_FW_AI_Mission","PATROLLING PERIMETER"];
+_grp setVariable [QGVAR(Mission),"PATROLLING PERIMETER"];
 true

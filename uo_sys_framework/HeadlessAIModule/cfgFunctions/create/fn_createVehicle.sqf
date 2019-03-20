@@ -1,14 +1,5 @@
-/*    Description: Create a vehicle and apply required settings.
- *     Arguments:
- *         ARRAY    - Position to create the vehicle at
- *        ARRAY    - Required Unit Settings
- *     Return Value:
- *         OBJECT     - Vehicle with settings
- *    Author
- *        suits & PiZZADOX
- */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
 
 params ["_pos","_vehArgs","_side",["_initmode",false,[false]]];
 _vehArgs params ["_uv","_vehClass","_vehpos","_vectorDir","_vectorUp","_damage","_fuel","_turretMags","_locked","_vehInWater","_vehName","_persistent","_vehInit","_fly","_flyInHeight"];
@@ -52,7 +43,7 @@ if (UO_FW_AutoTrackAsset_Enabled) then {
         };
     };
 };
-[_vehicle,_persistent] call EFUNC(AI,setPersistent);
+[_vehicle,_persistent] call FUNC(setPersistent);
 if (_initmode) then {
     _vehicle call _vehInit;
 } else {

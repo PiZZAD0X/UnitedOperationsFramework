@@ -1,20 +1,16 @@
-/*    Description: Check stance of player is allowed.
- *     Arguments:
- *        OBJECT    - Unit
- *         ARRAY     - Allowed Stance
- *     Return Value:
- *        BOOL     - True or False
- */
+#include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
+AI_EXEC_CHECK(SERVERHC);
+
 params [
     ["_unit",objNull,[objNull]],
-    ["_Allowed",[],[[]]],
+    ["_allowed",[],[[]]],
     ["_return",false,[false]]
 ];
-if !(_Allowed isEqualto []) then {
-    if ((stance _unit) in _Allowed) then {
-        _return    = false;
+if !(_allowed isEqualto []) then {
+    if ((stance _unit) in _allowed) then {
+        _return = false;
     } else {
-        _return    = true;
+        _return = true;
     };
 };
 _return

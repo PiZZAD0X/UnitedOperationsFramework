@@ -1,14 +1,6 @@
-/*    Description: Get a number of random positions with in a circle.
- *     Arguments:
- *         ARRAY    - Position
- *         NUMBER    - Minimum range out from original position.
- *         NUMBER    - Maximum range out from original position. (radius)
- *         NUMBER    - Amount of positions to return.
- *     Return Value:
- *         ARRAY     - POSITIONS
- *    Author
- *        suits & PiZZADOX
- */
+#include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
+AI_EXEC_CHECK(SERVERHC);
+
 params [["_pos",[0,0,0],[[]]],["_rangeMin",0,[0]],["_rangeMax",100,[0]],["_posCount",5,[0]],["_water",false,[false]]];
 private _return = [];
 private _max = (_posCount * 5);

@@ -1,6 +1,5 @@
-
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
 
 Private ["_Unit", "_NoFlanking", "_myNearestEnemy", "_myEnemyPos", "_rnd", "_dist", "_dir", "_myPlaces", "_RandomArray", "_RandomLocation", "_waypoint0", "_waypoint1", "_waypoint2", "_wPos", "_GroupCount"];
 //AI Waypoint Mock up using select best.
@@ -12,13 +11,13 @@ _Unit = leader _group;
 //if ((count (waypoints (group _Unit))) >= 3 && !(((velocityModelSpace _Unit) select 1) isEqualTo 0) ) exitWith {};
 if ((count (waypoints (group _Unit))) >= 3) exitWith {};
 
-private _WaypointCheck = _group call EFUNC(AI,Waypointcheck);
+private _WaypointCheck = _group call FUNC(Waypointcheck);
 if (count _WaypointCheck > 0) exitWith {};
 
-_NoFlanking = _group getVariable ["UO_FW_AI_REINFORCE",false];
+_NoFlanking = _group getVariable [QGVAR(REINFORCE),false];
 if (_NoFlanking) exitWith {};
 
-//_myNearestEnemy = _Unit call EFUNC(AI,ClosestEnemy);
+//_myNearestEnemy = _Unit call FUNC(ClosestEnemy);
 _myNearestEnemy = _Unit findNearestEnemy _Unit;
 
 if (isNull _myNearestEnemy) exitWith {
@@ -41,7 +40,7 @@ if (isNull _myNearestEnemy) exitWith {
         _waypoint2 setWaypointSpeed _speed;
         _waypoint2 setWaypointBehaviour _Beh;
         //_group setCurrentWaypoint [_group, _waypoint2 select 1];
-        _this spawn UO_FW_AI_fnc_FlankManeuver;
+        _this spawn FUNC(FlankManeuver);
     };
 
 };
@@ -53,7 +52,7 @@ if (_Flanking) exitWith {};
 
 if ((count (waypoints (group _Unit))) >= 3) exitWith {};
 
-if (_Unit getVariable "UO_FW_AI_GARRISONED") exitWith {};
+if (_Unit getVariable QGVAR(GARRISONED)) exitWith {};
 
         //systemchat format ["%1 RAWR B",side _unit];
 
@@ -69,7 +68,7 @@ _GroupCount = count units _group;
 _myEnemyPos = (getposATL _myNearestEnemy);
 if (_myEnemyPos isEqualTo [0,0,0]) exitWith {
     sleep 30;
-    [_Unit,_Flanking] spawn UO_FW_AI_fnc_FlankManeuver;
+    [_Unit,_Flanking] spawn FUNC(FlankManeuver);
 };
 
 private _RandomChance = random 100;
@@ -90,7 +89,7 @@ if (_RandomChance < 25) then {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //systemchat format ["%1 RAWR C",side _unit];
 sleep 0.25;
-if (_myEnemyPos isEqualTo [0,0,0]) exitWith {_Flanking = false;[_Unit,_Flanking] spawn UO_FW_AI_fnc_FlankManeuver;_Flanking = true;};
+if (_myEnemyPos isEqualTo [0,0,0]) exitWith {_Flanking = false;[_Unit,_Flanking] spawn FUNC(FlankManeuver);_Flanking = true;};
 
 while {(count (waypoints _group)) > 0} do {
  deleteWaypoint ((waypoints _group) select 0);
@@ -110,7 +109,7 @@ _group    = group _Unit;
 private _index = currentWaypoint _group;
 
 
-_myPlaces = selectBestPlaces [_myEnemyPos, UO_FW_AI_WaypointDistance,"((6*hills + 2*forest + 4*houses + 2*meadow) - sea + (2*trees)) - (1000*deadbody)", 100, 5];
+_myPlaces = selectBestPlaces [_myEnemyPos, GVAR(WaypointDistance),"((6*hills + 2*forest + 4*houses + 2*meadow) - sea + (2*trees)) - (1000*deadbody)", 100, 5];
 if (_myPlaces isEqualTo []) then {_myPlaces = [_myEnemyPos];};
 _RandomArray = _myPlaces call BIS_fnc_selectrandom;
 _RandomLocation = _RandomArray select 0;

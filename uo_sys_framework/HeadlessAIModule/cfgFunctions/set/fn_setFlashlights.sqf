@@ -1,13 +1,6 @@
-/*    Description: Set group to use flashlights.
- *     Arguments:
- *        GROUP    - Group
- *     Return Value:
- *         BOOL     - True
- *    Author
- *        suits & PiZZADOX
- */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
+
 params ["_grp"];
 {
     private _u = _x;

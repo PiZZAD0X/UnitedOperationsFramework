@@ -1,10 +1,5 @@
-/*    Description: Creates standard entities.
- *     Arguments:
- *         OBJECT - Unit to Remove From
- *         NUMBER - Remove Option
- */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
 
 params["_unit",["_mode",0,[0]]];
 switch (_mode) do {

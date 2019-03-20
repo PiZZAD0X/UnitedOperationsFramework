@@ -1,18 +1,5 @@
-/*    Description: Task a group to hold position no matter what.
- *     Arguments:
- *         GROUP    - Group
- *     Optional:
- *         STRING    - Behaviour
- *         STRING    - CombatMode
- *         STRING    - Speed
- *         STRING    - Formation
- *     Return Value:
- *         BOOL     - True
- */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
-
-
+AI_EXEC_CHECK(SERVERHC);
 
 params["_grp",["_behave","SAFE",[""]],["_combat","RED",[""]],["_speed","LIMITED",[""]],["_formation","WEDGE",[""]]];
 {_x forcespeed -1; _x enableAI "Path";} foreach units _grp;
@@ -27,5 +14,5 @@ for "_i" from 0 to (count _units) do {
     _u disableAI "Path";
 };
 _grp setvariable ["InitialWPSet",true];
-_grp setVariable ["UO_FW_AI_Mission","FORCE HOLD"];
+_grp setVariable [QGVAR(Mission),"FORCE HOLD"];
 true

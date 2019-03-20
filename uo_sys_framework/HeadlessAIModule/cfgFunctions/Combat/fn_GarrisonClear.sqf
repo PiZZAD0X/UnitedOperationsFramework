@@ -1,3 +1,6 @@
+#include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
+AI_EXEC_CHECK(SERVERHC);
+
 private ["_Enemy", "_nBuilding", "_Locations"];
 params ["_Unit","_MovedRecentlyCover","_InCover","_ActivelyClearing","_StartedInside","_GARRISONED"];
 
@@ -6,7 +9,7 @@ if (_MovedRecentlyCover || {_ActivelyClearing} || {_StartedInside} || {_GARRISON
 //Find the closest enemy (This should be the one that is in a building
 
 //systemchat format ["F %1",_Unit];
-_Enemy = _Unit call EFUNC(AI,ClosestEnemy);
+_Enemy = _Unit call FUNC(ClosestEnemy);
 if (isNil "_Enemy" || {(typeName _Enemy) isEqualTo "ARRAY"}) exitWith {};
 
 //Find nearest building to the enemy
@@ -18,8 +21,8 @@ _Locations = [_nBuilding] call BIS_fnc_buildingPositions;
 //Stop the AI - and then tell them to move to the house
 {
     //Set variable to true to prevent AI clearing buildings to often
-    //_x spawn UO_FW_AI_fnc_StanceModifier;
+    //_x spawn FUNC(StanceModifier);
     if (_Enemy distance _x < 200) then {
-        [_Locations,_x,_InCover,_ActivelyClearing,_Enemy] spawn UO_FW_AI_fnc_GarrisonClearPatrol;
+        [_Locations,_x,_InCover,_ActivelyClearing,_Enemy] spawn FUNC(GarrisonClearPatrol);
     };
 } foreach units (group _Unit);

@@ -9,17 +9,18 @@
  *        suits & PiZZADOX
  */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
 
 
 params [["_mode","",[""]],["_input",[],[[]]]];
 switch _mode do {
     case "init": {
         if !is3DEN then {
+            AI_EXEC_CHECK(SERVERHC);
             _input params ["_logic",["_isActivated",true,[true]]];
             if !(_isActivated) exitWith {};
-            if (UO_FW_AI_DEBUG) then {
-                [_logic] spawn UO_FW_AI_fnc_debugSyncedModules;
+            if (GETMVAR(Debug,false)) then {
+                [_logic] spawn FUNC(debugSyncedModules);
             };
         };
     };

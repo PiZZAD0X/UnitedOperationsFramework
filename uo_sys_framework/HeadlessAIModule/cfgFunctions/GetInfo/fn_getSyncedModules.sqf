@@ -1,11 +1,6 @@
-/*    Description: Gets synced modules and return only allowed synced modules. All synced modules if allowed not passed.
- *     Arguments:
- *         ANY        - Module, Group, Object (name, _logic)
- *    Optional:
- *         ARRAY    - Allowed Modules
- *     Return Value:
- *         ARRAY    - ALL or Allowed Synchronised Modules
- */
+#include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
+AI_EXEC_CHECK(SERVERHC);
+
 params ["_logic",["_AllowedModules",[],[[]]],["_AllowedSynced",[],[[]]],["_Allowed",false,[false]]];
 private _synced = synchronizedObjects _logic;
 {

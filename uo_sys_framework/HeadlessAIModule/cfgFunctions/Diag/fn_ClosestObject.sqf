@@ -1,8 +1,8 @@
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
 
 params ["_list","_object"];
-//[_list,_object] call EFUNC(AI,ClosestObject);
+//[_list,_object] call FUNC(ClosestObject);
 ////systemchat format ["%1",_object];
 private _position = [0,0,0];
 if (isNil "_object") exitWith {};

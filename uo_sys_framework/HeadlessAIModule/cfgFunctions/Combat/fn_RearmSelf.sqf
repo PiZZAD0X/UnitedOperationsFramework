@@ -1,6 +1,9 @@
+#include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
+AI_EXEC_CHECK(SERVERHC);
+
 //This function will determine if an AI is low on ammo and needs to re-arm.
 //This script passes _this. _this should be the AI unit.
-private _AL = UO_FW_AI_AIMagLimit;
+private _AL = GVAR(AIMagLimit);
 if (vehicle _this != _this) exitWith {};
 
 //The first thing we want to do. Is figure out what ammo this unit is using.
@@ -36,7 +39,7 @@ if (_TC < _AL) then {
             if (isNil "_mags") then {_mags = [];};
             {
                 if (_x isEqualTo _CM) exitwith {
-                    [_this,_Unit] spawn UO_FW_AI_fnc_RearmGo;
+                    [_this,_Unit] spawn FUNC(RearmGo);
                     _Stop = true;
                 };
             } foreach _mags;

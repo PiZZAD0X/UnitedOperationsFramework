@@ -1,14 +1,5 @@
-/*    Description: Populates the zone with all linked units, vehicles and objects.
- *     Arguments:
- *         ARRAY    - Entities
- *         NUMBER    - Spawn Delay
- *     Return Value:
- *         BOOL     - True
- *    Author
- *        suits & PiZZADOX
- */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
 
 params ["_args",["_initmode",false,[false]]];
 _args params [["_zone",objNull,[objNull]],["_entities",[],[[]]],["_delay",0,[0]],["_code",{},[{}]]];
@@ -31,7 +22,7 @@ _entities params [["_grps",[],[[]]],["_emptyvehs",[],[[]]],["_objs",[],[[]]]];
     if ((count (_veh select 9)) > 1) then {
         missionNamespace setVariable[(_veh select 9), _vehicle];
     };
-    [_vehicle,(_veh select 10)] call EFUNC(AI,setPersistent);
+    [_vehicle,(_veh select 10)] call FUNC(setPersistent);
     if !(_initmode) then {
         sleep 0.25;
         _vehicle spawn (_veh select 11);
@@ -56,7 +47,7 @@ _entities params [["_grps",[],[[]]],["_emptyvehs",[],[[]]],["_objs",[],[[]]]];
     if ((count (_obj select 6)) > 1) then {
         missionNamespace setVariable[(_obj select 6), _object];
     };
-    [_object,(_obj select 7)] call EFUNC(AI,setPersistent);
+    [_object,(_obj select 7)] call FUNC(setPersistent);
     _object spawn (_obj select 8);
     if !(_initmode) then {
         sleep 0.25;
@@ -66,15 +57,15 @@ _entities params [["_grps",[],[[]]],["_emptyvehs",[],[[]]],["_objs",[],[[]]]];
     private _grpSet = _x select 1;
     if (((_grpSet select 15) > 0) && {!(_grpSet select 16)}) then {
         if (_initmode) then {
-            [_x,true] call EFUNC(AI,createOccupyGroup);
+            [_x,true] call FUNC(createOccupyGroup);
         } else {
-            [_x,false] spawn UO_FW_AI_fnc_createOccupyGroup;
+            [_x,false] spawn FUNC(createOccupyGroup);
         };
     } else {
         if (_initmode) then {
-            [_x,true] call EFUNC(AI,createGroup);
+            [_x,true] call FUNC(createGroup);
         } else {
-            [_x,false] spawn UO_FW_AI_fnc_createGroup;
+            [_x,false] spawn FUNC(createGroup);
         };
     };
     if !(_initmode) then {
@@ -83,9 +74,9 @@ _entities params [["_grps",[],[[]]],["_emptyvehs",[],[[]]],["_objs",[],[[]]]];
 } forEach _grps;
 if (_initmode) then {
     [_zone] call _code;
-    ([_zone,["UO_FW_AI_TaskModule"]] call EFUNC(AI,getSyncedModules)) call EFUNC(AI,taskActivate);
+    ([_zone,[QGVAR(TaskModule)]] call FUNC(getSyncedModules)) call FUNC(taskActivate);
 } else {
     [_zone] spawn _code;
-    ([_zone,["UO_FW_AI_TaskModule"]] call EFUNC(AI,getSyncedModules)) spawn UO_FW_AI_fnc_taskActivate;
+    ([_zone,[QGVAR(TaskModule)]] call FUNC(getSyncedModules)) spawn FUNC(taskActivate);
 };
 true

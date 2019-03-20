@@ -1,11 +1,6 @@
-/*    Description: Gets synced task modules to a group.
- *    Arguments:
- *         GROUP    - Group need to get tasks for
- *     Return Value:
- *         GROUP     - Synchronised Task Modules
- */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
+
 params ["_grp",["_AllowedModules",[],[[]]],["_AllowedSynced",[],[[]]],["_item",objNull,[objNull]],["_Allowed",false,[false]]];
 private _grpldr = leader _grp;
 if (!isNull assignedVehicle _grpldr) then {

@@ -1,16 +1,6 @@
-/*    Description: Gets synced units, vehicles and objects to a module.
- *    Arguments:
- *        OBJECT    - Unit
- *        ARRAY    - Units Role and Turret  (assignedVehicleRole)
- *        OBJECT    - Vehicle
- *    Optional (Vehicle OBJECT not passed can pass position of vehicle and its classname):
- *        ARRAY    - Position of Vehicle
- *         STRING    - Vehicle Class Name
- *    Return Value:
- *        TRUE
- */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
+
 params [["_u",objNull,[objNull]],["_vr",[],[[]]],["_veh",objNull,[objNull]],["_pos",[],[[]]],["_vc","",[""]]];
 if (isNull _veh) then {
     _veh = _pos nearestObject _vc;

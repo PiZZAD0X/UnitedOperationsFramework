@@ -1,26 +1,5 @@
-/*    Description: Task a group to patrol a box around their patrol position.
- *     Arguments:
- *         GROUP    - Group
- *         ARRAY    - Task Position
- *     Optional:
- *         NUMBER    - Create Waypoint Radius (random waypoint placement within radius)
- *         NUMBER    - Wait Time at Waypoints
- *         STRING    - Behaviour
- *         STRING    - CombatMode
- *         STRING    - Speed
- *         STRING    - Formation
- *         STRING    - Waypoint Type
- *         STRING    - On Waypoint Complete Statement
- *         NUMBER    - Waypoint Complete Radius
- *     Return Value:
- *         ARRAY     - Waypoint
- *    Author:
- *        Rommel    - CBA_A3
- *    Modified
- *        suits & PiZZADOX
- */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
 
 params [
     "_grp",

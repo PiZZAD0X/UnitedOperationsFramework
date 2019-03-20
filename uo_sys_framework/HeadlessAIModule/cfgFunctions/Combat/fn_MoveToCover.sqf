@@ -1,11 +1,14 @@
+#include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
+AI_EXEC_CHECK(SERVERHC);
+
 private ["_Unit", "_coverObjects", "_startingdistance", "_class", "_return", "_parents", "_BoundingArray", "_p1", "_p2", "_maxWidth", "_maxLength", "_GroupLeader", "_unit", "_NearestEnemy", "_GuessLocation", "_coverObjectsClosest", "_Closestobject", "_coverObjectspos", "_arrow", "_UnitGroup", "_OriginalSpeed", "_WaitTime","_WeakListFinal"];
 
 _Unit = _this select 0;
 if !((vehicle _Unit) isEqualTo _Unit) exitWith {};
 
-waitUntil {UO_FW_AI_CurrentlyMoving < UO_FW_AI_CurrentlyMovingLimit};
+waitUntil {GVAR(CurrentlyMoving) < GVAR(CurrentlyMovingLimit)};
 
-    UO_FW_AI_CurrentlyMoving = UO_FW_AI_CurrentlyMoving + 1;
+    GVAR(CurrentlyMoving) = GVAR(CurrentlyMoving) + 1;
 
     _MovedRecentlyCover = _this select 1;
     _GRENADETHROWN = _this select 2;
@@ -13,19 +16,19 @@ waitUntil {UO_FW_AI_CurrentlyMoving < UO_FW_AI_CurrentlyMovingLimit};
     _StartedInside = _this select 4;
 
     //Let's find the nearest enemy to his unit.
-    _NearestEnemy = _Unit call EFUNC(AI,ClosestEnemy);
+    _NearestEnemy = _Unit call FUNC(ClosestEnemy);
     _DistanceCheck = _NearestEnemy distance _Unit;
-    if (isNil "_NearestEnemy" || {(typeName _NearestEnemy isEqualTo "ARRAY")} || {isNil "_Unit"} || {!(alive _NearestEnemy)} || {(_DistanceCheck) > 2000}) exitWith {_Unit forcespeed -1;UO_FW_AI_CurrentlyMoving = UO_FW_AI_CurrentlyMoving - 1;};
+    if (isNil "_NearestEnemy" || {(typeName _NearestEnemy isEqualTo "ARRAY")} || {isNil "_Unit"} || {!(alive _NearestEnemy)} || {(_DistanceCheck) > 2000}) exitWith {_Unit forcespeed -1;GVAR(CurrentlyMoving) = GVAR(CurrentlyMoving) - 1;};
 
 
 
     _MoveToPos = (getpos _Unit);
-    _GARRISONED = _Unit getVariable ["UO_FW_AI_GARRISONED",false];
-    _CoverPos = [_Unit,_MoveToPos,_GARRISONED,_MovedRecentlyCover,false,_StartedInside,_NearestEnemy] call EFUNC(AI,FindCoverPos);
+    _GARRISONED = _Unit getVariable [QGVAR(GARRISONED),false];
+    _CoverPos = [_Unit,_MoveToPos,_GARRISONED,_MovedRecentlyCover,false,_StartedInside,_NearestEnemy] call FUNC(FindCoverPos);
 
     if !(isNil "_CoverPos") then {
         //Lets us know where they were told to move!
-        if (UO_FW_AI_DEBUG) then {
+        if (GETMVAR(Debug,false)) then {
             _arrow = "Sign_Sphere200cm_F" createVehicle [0,0,0];
             _arrow setpos _CoverPos;
             _arrow spawn  {
@@ -63,4 +66,4 @@ waitUntil {UO_FW_AI_CurrentlyMoving < UO_FW_AI_CurrentlyMovingLimit};
     else {
         _Unit doMove _MoveToPos;
     };
-    UO_FW_AI_CurrentlyMoving = UO_FW_AI_CurrentlyMoving - 1;
+    GVAR(CurrentlyMoving) = GVAR(CurrentlyMoving) - 1;

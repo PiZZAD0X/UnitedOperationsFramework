@@ -1,14 +1,17 @@
+#include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
+AI_EXEC_CHECK(SERVERHC);
+
 private ["_Unit", "_TargetPosition", "_unit", "_NewPosition", "_Accuracy", "_Shake", "_Speed", "_SpotTime", "_SpotDistance", "_target"];
 params ["_Unit","_DiagLastCheck","_TargetPosition"];
 
 _DiagLastCheck = diag_ticktime;
 if (_TargetPosition isEqualTo [0,0,0]) then {
     //_target = assignedTarget _unit;
-    _target = _Unit call EFUNC(AI,ClosestEnemy);if (_target isEqualTo [0,0,0]) exitwith {};
+    _target = _Unit call FUNC(ClosestEnemy);if (_target isEqualTo [0,0,0]) exitwith {};
     _TargetPosition = getpos _target;
 } else {
     //_target = assignedTarget _unit;
-    _target = _Unit call EFUNC(AI,ClosestEnemy);if (_target isEqualTo [0,0,0]) exitwith {};
+    _target = _Unit call FUNC(ClosestEnemy);if (_target isEqualTo [0,0,0]) exitwith {};
     _NewPosition = getpos _Target;
 
 
@@ -19,8 +22,8 @@ if (_TargetPosition isEqualTo [0,0,0]) then {
         _SpotTime = _Unit skill "spotTime";
         _SpotDistance = _Unit skill "spotDistance";
 
-        if (UO_FW_AI_RainImpact) then {
-            private _WeatherCheck = (rain)/UO_FW_AI_RainPercent;
+        if (GVAR(RainImpact)) then {
+            private _WeatherCheck = (rain)/GVAR(RainPercent);
             _Unit setSkill ["aimingAccuracy",(_Accuracy + 0.1) - _WeatherCheck];
             _Unit setSkill ["aimingShake",(_Shake + 0.1) - _WeatherCheck];
             _Unit setSkill ["aimingSpeed",(_Speed + 0.1) - _WeatherCheck];
@@ -40,8 +43,8 @@ if (_TargetPosition isEqualTo [0,0,0]) then {
         _SpotTime = _Unit skill "spotTime";
         _SpotDistance = _Unit skill "spotDistance";
 
-        if (UO_FW_AI_RainImpact) then {
-            private _WeatherCheck = (rain)/UO_FW_AI_RainPercent;
+        if (GVAR(RainImpact)) then {
+            private _WeatherCheck = (rain)/GVAR(RainPercent);
             _Unit setSkill ["aimingAccuracy",_Accuracy - _WeatherCheck];
             _Unit setSkill ["aimingShake",_Shake - _WeatherCheck];
             _Unit setSkill ["aimingSpeed",_Speed - _WeatherCheck];

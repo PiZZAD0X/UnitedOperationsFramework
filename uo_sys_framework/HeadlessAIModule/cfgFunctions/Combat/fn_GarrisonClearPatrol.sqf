@@ -1,3 +1,6 @@
+#include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
+AI_EXEC_CHECK(SERVERHC);
+
 private ["_Locations", "_Unit", "_InCover", "_Enemy", "_RefinedBuildingArray", "_UnitPosition", "_AcceptableRange", "_ClosestPos"];
 params ["_Locations","_Unit","_InCover","_InCover","_Enemy"];
 
@@ -18,7 +21,7 @@ sleep (random 5);
 
 
             //Define the closest position to be edited
-            if (_RefinedBuildingArray isEqualTo []) then {_ClosestPos = [_Locations,_Enemy] call EFUNC(AI,ClosestObject);} else {_ClosestPos = [_RefinedBuildingArray,_Enemy] call EFUNC(AI,ClosestObject);};
+            if (_RefinedBuildingArray isEqualTo []) then {_ClosestPos = [_Locations,_Enemy] call FUNC(ClosestObject);} else {_ClosestPos = [_RefinedBuildingArray,_Enemy] call FUNC(ClosestObject);};
 
 
 if (isNil "_closestpos") exitWith {};
@@ -42,7 +45,7 @@ while {(_Unit distance _ClosestPos) > 3 && alive _Unit} do {
 
 
             //Define the closest position to be edited
-            if (_RefinedBuildingArray isEqualTo []) then {_ClosestPos = [_Locations,_Enemy] call EFUNC(AI,ClosestObject);} else {_ClosestPos = [_RefinedBuildingArray,_Enemy] call EFUNC(AI,ClosestObject);};
+            if (_RefinedBuildingArray isEqualTo []) then {_ClosestPos = [_Locations,_Enemy] call FUNC(ClosestObject);} else {_ClosestPos = [_RefinedBuildingArray,_Enemy] call FUNC(ClosestObject);};
 
 
 };

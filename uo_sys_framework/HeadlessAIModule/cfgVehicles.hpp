@@ -1,13 +1,13 @@
 
 #include "cfgFSM.hpp"
 
-class EGVAR(AI,Module) : EGVAR(Core,BaseModule) {
+class EGVAR(AI,Module): EGVAR(Core,BaseModule) {
     scope = 1;
     category = "UO_FrameworkCategory_AI";
     icon = "\a3\3DEN\Data\CfgWaypoints\scripted_ca.paa";
 };
 
-class EGVAR(AI,ZoneModule) : EGVAR(AI,Module) {
+class EGVAR(AI,ZoneModule): EGVAR(AI,Module) {
     scope = 2;
     displayName = "AI Zone (Circle)";
     //icon = "\UO_FW\Resources\Icons\zonemodule_ca.paa";
@@ -41,7 +41,7 @@ class EGVAR(AI,ZoneModule) : EGVAR(AI,Module) {
             displayName = "Activation Radius X";
             tooltip = "The size of the X value of the area the player will initiate this zone at in metres. Default: 100";
             property = QEGVAR(AI,zoneRadiusX);
-            control = QMGVAR(RadiusAttribute);
+            control = QEGVAR(Core,RadiusAttribute);
             expression = MODULE_EXPRESSION;
             defaultValue = "100";
             typeName = "NUMBER";
@@ -51,7 +51,7 @@ class EGVAR(AI,ZoneModule) : EGVAR(AI,Module) {
             displayName = "Activation Radius Y";
             tooltip = "The size of the Y value of the area the player will initiate this zone at in metres. Default: 100";
             property = QEGVAR(AI,zoneRadiusY);
-            control = QMGVAR(RadiusAttribute);
+            control = QEGVAR(Core,RadiusAttribute);
             expression = MODULE_EXPRESSION;
             defaultValue = "100";
             typeName = "NUMBER";
@@ -109,7 +109,7 @@ class EGVAR(AI,ZoneModule) : EGVAR(AI,Module) {
         };
     };
 };
-class EGVAR(AI,ZoneModule_R) : UO_FW_AI_ZoneModule {
+class EGVAR(AI,ZoneModule_R): UO_FW_AI_ZoneModule {
     displayName = "AI Zone (Square)";
     class AttributeValues {
         size2[] = {100,100};
@@ -117,7 +117,7 @@ class EGVAR(AI,ZoneModule_R) : UO_FW_AI_ZoneModule {
     };
 };
 
-class EGVAR(AI,ControlModule) : EGVAR(AI,Module) {
+class EGVAR(AI,ControlModule): EGVAR(AI,Module) {
     scope = 2;
     displayName = "AI Control (Circle)";
     //icon = "\UO_FW\Resources\Icons\controlmodule_ca.paa";
@@ -139,7 +139,7 @@ class EGVAR(AI,ControlModule) : EGVAR(AI,Module) {
             displayName = "Activation Radius X";
             tooltip = "The size of the X value of the area the player will initiate the control zone at in metres. Default: 100";
             property = QEGVAR(AI,ControlRadiusX);
-            control = QMGVAR(RadiusAttribute);
+            control = QEGVAR(Core,RadiusAttribute);
             expression = MODULE_EXPRESSION;
             defaultValue = "100";
             typeName = "NUMBER";
@@ -149,7 +149,7 @@ class EGVAR(AI,ControlModule) : EGVAR(AI,Module) {
             displayName = "Activation Radius Y";
             tooltip = "The size of the Y value of the area the player will initiate the control zone at in metres. Default: 100";
             property = QEGVAR(AI,ControlRadiusY);
-            control = QMGVAR(RadiusAttribute);
+            control = QEGVAR(Core,RadiusAttribute);
             expression = MODULE_EXPRESSION;
             defaultValue = "100";
             typeName = "NUMBER";
@@ -224,7 +224,7 @@ class EGVAR(AI,ControlModule) : EGVAR(AI,Module) {
         };
     };
 };
-class EGVAR(AI,ControlModule_R) : UO_FW_AI_ControlModule {
+class EGVAR(AI,ControlModule_R): UO_FW_AI_ControlModule {
     displayName = "AI Control (Square)";
     class AttributeValues {
         size2[] = {100,100};
@@ -232,7 +232,7 @@ class EGVAR(AI,ControlModule_R) : UO_FW_AI_ControlModule {
     };
 };
 
-class EGVAR(AI,TaskModule) : EGVAR(AI,Module) {
+class EGVAR(AI,TaskModule): EGVAR(AI,Module) {
     scope = 2;
     displayName = "AI Task";
     //icon = "\UO_FW\Resources\Icons\taskmodule_ca.paa";
@@ -252,7 +252,7 @@ class EGVAR(AI,TaskModule) : EGVAR(AI,Module) {
             displayName = "Radius";
             tooltip = "The range the group will attempt to conduct the set task in. Default: 100";
             property = QEGVAR(AI,taskRadius);
-            control = QMGVAR(RadiusAttribute);
+            control = QEGVAR(Core,RadiusAttribute);
             expression = MODULE_EXPRESSION;
             defaultValue = "100";
             typeName = "NUMBER";
@@ -373,7 +373,7 @@ class EGVAR(AI,TaskModule) : EGVAR(AI,Module) {
         };
     };
 };
-class EGVAR(AI,PositionModule) : EGVAR(AI,Module) {
+class EGVAR(AI,PositionModule): EGVAR(AI,Module) {
     scope = 2;
     displayName = "AI Position (Circle)";
     //icon = "\UO_FW\Resources\Icons\posmodule_ca.paa";
@@ -402,7 +402,7 @@ class EGVAR(AI,PositionModule) : EGVAR(AI,Module) {
             displayName = "Radius X";
             tooltip = "The X radius the position will use to generate a random position. Default: 0";
             property = QEGVAR(AI,positionRadiusX);
-            control = QMGVAR(RadiusAttribute);
+            control = QEGVAR(Core,RadiusAttribute);
             expression = MODULE_EXPRESSION;
             defaultValue = "0";
             typeName = "NUMBER";
@@ -412,7 +412,7 @@ class EGVAR(AI,PositionModule) : EGVAR(AI,Module) {
             displayName = "Radius Y";
             tooltip = "The Y radius the position will use to generate a random position. Default: 0";
             property = QEGVAR(AI,positionRadiusY);
-            control = QMGVAR(RadiusAttribute);
+            control = QEGVAR(Core,RadiusAttribute);
             expression = MODULE_EXPRESSION;
             defaultValue = "0";
             typeName = "NUMBER";
@@ -430,14 +430,14 @@ class EGVAR(AI,PositionModule) : EGVAR(AI,Module) {
         };
     };
 };
-class EGVAR(AI,PositionModule_R) : EGVAR(AI,PositionModule) {
+class EGVAR(AI,PositionModule_R): EGVAR(AI,PositionModule) {
     displayName = "AI Position (Square)";
     class AttributeValues {
         size2[] = {0,0};
         IsRectangle = 1;
     };
 };
-class EGVAR(AI,RespawnModule) : EGVAR(AI,Module)  {
+class EGVAR(AI,RespawnModule): EGVAR(AI,Module)  {
     scope = 2;
     displayName = "AI Respawn";
     //icon = "\UO_FW\Resources\Icons\respawnmodule_ca.paa";
@@ -460,7 +460,7 @@ class EGVAR(AI,RespawnModule) : EGVAR(AI,Module)  {
         };
     };
 };
-class EGVAR(AI,TemplateModule) : EGVAR(AI,Module) {
+class EGVAR(AI,TemplateModule): EGVAR(AI,Module) {
     scope = 2;
     displayName = "AI Group Template";
     //icon = "\UO_FW\Resources\Icons\templatemodule_ca.paa";

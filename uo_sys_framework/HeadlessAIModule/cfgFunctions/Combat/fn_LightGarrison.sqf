@@ -1,14 +1,17 @@
+#include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
+AI_EXEC_CHECK(SERVERHC);
+
 private ["_Group","_UnitsGroup","_SpecificUnit","_ClosestEnemy","_nBuilding","_IsEnterable","_CheckDist","_bposleft","_pcnt","_LocationArray","_AttackPoint"];
 params ["_Unit","_MovedRecentlyCover","_ActivelyClearing","_StartedInside"];
 
-if (_MovedRecentlyCover || {_ActivelyClearing} || {_StartedInside} || {_Unit getVariable "UO_FW_AI_GARRISONED"}) exitWith {};
+if (_MovedRecentlyCover || {_ActivelyClearing} || {_StartedInside} || {_Unit getVariable QGVAR(GARRISONED)}) exitWith {};
 _Group = (group _Unit);
 _UnitsGroup = units _Group;
 _SpecificUnit = _UnitsGroup select 0;
 
 
 //systemchat format ["G %1",_Unit];
-_ClosestEnemy = _Unit call EFUNC(AI,ClosestEnemy);
+_ClosestEnemy = _Unit call FUNC(ClosestEnemy);
 if (isNil "_ClosestEnemy" || {_ClosestEnemy isEqualTo []}) exitWith {};
 
 _nBuilding = nearestBuilding _ClosestEnemy;

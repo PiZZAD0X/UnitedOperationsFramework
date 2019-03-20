@@ -1,14 +1,11 @@
-//Created on 8/14/14
-// Modified on : 8/3/16: Resolved AI getting stuck when no enemies existed, or enemies were far away.
-
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
 
 params ["_Unit","_MovedRecently","_VisuallyCanSee","_MovedRecentlyCover"];
 private ["_NearestEnemy", "_intersections"];
 
     ////systemchat format ["M %1",_Unit];
-    //_NearestEnemy = _Unit call EFUNC(AI,ClosestEnemy);
+    //_NearestEnemy = _Unit call FUNC(ClosestEnemy);
     _NearestEnemy = _Unit findNearestEnemy _Unit;
     _DistanceCheck = _NearestEnemy distance _Unit;
     //if (isNil "_NearestEnemy" || {_MovedRecentlyCover} || {(typeName _NearestEnemy isEqualTo "ARRAY")} || {isNil "_Unit"} || {!(alive _NearestEnemy)} || {(_NearestEnemy distance _Unit) > 5000}) exitWith {};
@@ -16,7 +13,7 @@ private ["_NearestEnemy", "_intersections"];
 
 
         //This will tell the AI to regroup if they have wandered too far.
-        _ReturnedFriendly = [units (group _Unit),_Unit] call EFUNC(AI,ClosestObject);
+        _ReturnedFriendly = [units (group _Unit),_Unit] call FUNC(ClosestObject);
         if (isNil "_ReturnedFriendly") then {_ReturnedFriendly = [0,0,0]};
         if (_ReturnedFriendly distance _Unit > 30 && !(_ReturnedFriendly isEqualTo [0,0,0])) then {
             _Unit doMove (getpos _ReturnedFriendly);
@@ -63,6 +60,6 @@ private ["_NearestEnemy", "_intersections"];
     }
     else {
             _VisuallyCanSee = false;
-            //_Unit spawn {sleep 10;if !(_Unit getVariable "UO_FW_AI_VisuallyCanSee") then {_Unit forceSpeed -1;};};
+            //_Unit spawn {sleep 10;if !(_Unit getVariable QGVAR(VisuallyCanSee)) then {_Unit forceSpeed -1;};};
     };
 //};

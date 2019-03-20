@@ -1,31 +1,31 @@
-//Prints and updates markers for all in UO_FW_AI_TrackedUnits array
+//Prints and updates markers for all in GVAR(TrackedUnits) array
 
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
 
-UO_FW_AI_MARKERARRAY = [];
-UO_FW_AI_TrackedUnits = [];
+GVAR(MARKERARRAY) = [];
+GVAR(TrackedUnits) = [];
 
-if !(UO_FW_AI_MARKERS_Enabled) exitWith {};
-private _HCMapMarkersPFH = [{
+if !(GETMVAR(Markers_enabled,false)) exitWith {};
+GVAR(MapMarkersPFH) = [{
     {
         _x params ["_side","_group","_leader","_groupcount","_behaviourtasking","_behaviour","_target","_position","_hasRadio"];
         if (!(alive _leader) || !(local _leader)) exitwith {
             private _lastname = name _leader;
             private _trackername = format["trk_%1_%2",_lastname,_leader];
-            if (_trackername in UO_FW_AI_MARKERARRAY) then {
+            if (_trackername in GVAR(MARKERARRAY)) then {
                 deletemarker _trackername;
-                UO_FW_AI_MARKERARRAY = UO_FW_AI_MARKERARRAY - [_trackername];
+                GVAR(MARKERARRAY) = GVAR(MARKERARRAY) - [_trackername];
             };
             private _destname = format["dest_%1_%2",_lastname,_leader];
-            if (_destname in UO_FW_AI_MARKERARRAY) then {
+            if (_destname in GVAR(MARKERARRAY)) then {
                 deletemarker _destname;
-                UO_FW_AI_MARKERARRAY = UO_FW_AI_MARKERARRAY - [_destname];
+                GVAR(MARKERARRAY) = GVAR(MARKERARRAY) - [_destname];
             };
             private _targetname = format["target_%1_%2",_lastname,_leader];
-            if (_targetname in UO_FW_AI_MARKERARRAY) then {
+            if (_targetname in GVAR(MARKERARRAY)) then {
                 deletemarker _targetname;
-                UO_FW_AI_MARKERARRAY = UO_FW_AI_MARKERARRAY - [_targetname];
+                GVAR(MARKERARRAY) = GVAR(MARKERARRAY) - [_targetname];
             };
         };
         private _rankshort = [rank _leader,"displayNameShort"] call BIS_fnc_rankparams;
@@ -38,9 +38,9 @@ private _HCMapMarkersPFH = [{
             case civilian: {"ColorYellow"};
             default {"ColorBlack"};
         });
-        if (!(_trackername in UO_FW_AI_MARKERARRAY)) then {
+        if (!(_trackername in GVAR(MARKERARRAY))) then {
             private _markerlead = createMarker [_trackername,[0,0]];
-            UO_FW_AI_MARKERARRAY pushback _trackername;
+            GVAR(MARKERARRAY) pushback _trackername;
             private _drawicon = switch (true) do {
                 case (_leader isKindOf "Man"): {"b_inf"};
                 case (_leader isKindOf "LandVehicle"): {"b_motor_inf"};
@@ -82,9 +82,9 @@ private _HCMapMarkersPFH = [{
         _trackername setMarkerText _text;
         if (_usedest) then {
             private _destname = format["dest_%1_%2",_lastname,_leader];
-            if (!(_destname in UO_FW_AI_MARKERARRAY)) then {
+            if (!(_destname in GVAR(MARKERARRAY))) then {
                 private _markerobj = createMarker[_destname,[0,0]];
-                UO_FW_AI_MARKERARRAY pushback _destname;
+                GVAR(MARKERARRAY) pushback _destname;
                 private _wptext = format ["%1. %2",_rankshort, _lastname];
                 _destname setMarkerShape "ICON";
                 _destname setMarkerType "mil_marker";
@@ -102,16 +102,16 @@ private _HCMapMarkersPFH = [{
             };
         } else {
             private _destname = format["dest_%1_%2",_lastname,_leader];
-            if (_destname in UO_FW_AI_MARKERARRAY) then {
+            if (_destname in GVAR(MARKERARRAY)) then {
                 deletemarker _destname;
-                UO_FW_AI_MARKERARRAY = UO_FW_AI_MARKERARRAY - [_destname];
+                GVAR(MARKERARRAY) = GVAR(MARKERARRAY) - [_destname];
             };
         };
         if (_usetarget) then {
             private _targetname = format["target_%1_%2",_lastname,_leader];
-            if (!(_targetname in UO_FW_AI_MARKERARRAY)) then {
+            if (!(_targetname in GVAR(MARKERARRAY))) then {
                 private _markertarget = createMarker[_targetname,[0,0]];
-                UO_FW_AI_MARKERARRAY pushback _targetname;
+                GVAR(MARKERARRAY) pushback _targetname;
                 private _targettext = format ["%1. %2",_rankshort, _lastname];
                 _targetname setMarkerShape "ICON";
                 _targetname setMarkerType "mil_objective";
@@ -122,10 +122,10 @@ private _HCMapMarkersPFH = [{
             _targetname setMarkerPos [(getpos _target select 0),(getpos _target select 1)];
         } else {
             private _targetname = format["target_%1_%2",_lastname,_leader];
-            if (_targetname in UO_FW_AI_MARKERARRAY) then {
+            if (_targetname in GVAR(MARKERARRAY)) then {
                 deletemarker _targetname;
-                UO_FW_AI_MARKERARRAY = UO_FW_AI_MARKERARRAY - [_targetname];
+                GVAR(MARKERARRAY) = GVAR(MARKERARRAY) - [_targetname];
             };
         };
-    } foreach UO_FW_AI_GroupArray;
+    } foreach GVAR(GroupArray);
 }, 120] call CBA_fnc_addPerFrameHandler;

@@ -1,27 +1,19 @@
-/*    Description: Set the task as active for the group.
- *     Arguments:
- *         GROUP    - Group
- *         OBJECT    - New Task Module
- *     Return Value:
- *         BOOL     - True
- *    Author
- *        suits & PiZZADOX
- */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
+
 params ["_grp",["_newTask",objNull,[objNull]],["_setTime",0,[0]]];
 if (!isNull _newTask) then {
-    (_newTask call EFUNC(AI,getTaskParams)) params ["_newTask","_cond","_prior","_time","_onComp","_TaskId","_radius","_task","_occupy","_wait","_behave","_combat","_speed","_form","_stance"];
+    (_newTask call FUNC(getTaskParams)) params ["_newTask","_cond","_prior","_time","_onComp","_TaskId","_radius","_task","_occupy","_wait","_behave","_combat","_speed","_form","_stance"];
     if (_time isEqualTo 0) then {
         _setTime = 1E10;
     } else {
         _setTime = _time;
     };
-    _grp setVariable["UO_FW_AI_CurrentTaskEndTime",(CBA_MissionTime + _setTime)];
-    if (!isNull (_grp getVariable["UO_FW_AI_CurrentTask",objNull])) then {
-        [_grp,(_grp getVariable["UO_FW_AI_CurrentTask",objNull])] call EFUNC(AI,taskComplete);
+    _grp setVariable[QGVAR(CurrentTaskEndTime),(CBA_MissionTime + _setTime)];
+    if (!isNull (_grp getVariable[QGVAR(CurrentTask),objNull])) then {
+        [_grp,(_grp getVariable[QGVAR(CurrentTask),objNull])] call FUNC(taskComplete);
     };
-    _grp setVariable["UO_FW_AI_CurrentTask",_newTask];
+    _grp setVariable[QGVAR(CurrentTask),_newTask];
     _grp call CBA_fnc_clearWaypoints;
     if (!(_stance isEqualTo "unchanged")) then {
         {
@@ -34,7 +26,7 @@ if (!isNull _newTask) then {
     private _newForm = if (_form isEqualTo "unchanged") then {(formation _grp)} else {_form};
     _passarray = [_task,_grp,(getPosATL _newTask),_radius,_wait,_newBehave,_newCombat,_newSpeed,_newForm,_occupy];
     [{!((count waypoints (_this select 1)) isEqualto 0)},{
-        _this call EFUNC(AI,taskAssign);
+        _this call FUNC(taskAssign);
     },_passarray] call CBA_fnc_waitUntilAndExecute;
 };
 true
