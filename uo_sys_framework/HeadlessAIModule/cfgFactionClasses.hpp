@@ -1,3 +1,3 @@
-class UO_FrameworkCategory_AI: UO_FrameworkCategory {
+class MGVAR(AICategory): MGVAR(FrameworkCategory) {
     displayName = " United Operations Framework AI";
 };

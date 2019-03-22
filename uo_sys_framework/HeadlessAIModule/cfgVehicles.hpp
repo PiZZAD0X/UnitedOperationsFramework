@@ -3,7 +3,7 @@
 
 class EGVAR(AI,Module): EGVAR(Core,BaseModule) {
     scope = 1;
-    category = "UO_FrameworkCategory_AI";
+    category = QMGVAR(AICategory);
     icon = "\a3\3DEN\Data\CfgWaypoints\scripted_ca.paa";
 };
 
