@@ -79,7 +79,11 @@ if (GETMVAR(NATO_INDFOR,false)) then {
     };
     private _friendlyStrength = GETMVAR(NATO_FRIENDLY_STRENGTH_INDFOR,"");
     if !(_friendlyStrength isEqualTo "") then {
-        _friendlyStr = _friendlyStr + "<font color='#5BD527' size='14.0'><h1>Equipment:</h1></font color><br/>" + _friendlyStrength + "<br/><br/>";
+        _friendlyStr = _friendlyStr + "<font color='#5BD527' size='14.0'><h1>Strength:</h1></font color><br/>" + _friendlyStrength + "<br/><br/>";
+    };
+    private _friendlyEquipment = GETMVAR(NATO_FRIENDLY_EQUIPMENT_INDFOR,"");
+    if !(_friendlyEquipment isEqualTo "") then {
+        _friendlyStr = _friendlyStr + "<font color='#5BD527' size='14.0'><h1>Equipment:</h1></font color><br/>" + _friendlyEquipment + "<br/><br/>";
     };
     private _friendlyAppearance = GETMVAR(NATO_FRIENDLY_APPEARANCE_INDFOR,"");
     if !(_friendlyAppearance isEqualTo "") then {
@@ -406,14 +410,14 @@ if (GETMVAR(MissionNotes_Enable,false)) then {
     //Mission Notes
     private _notesStr = "";
 
-    private _notesTesters = GETMVAR(MissionNotes_Testers,"");
-    if !(_notesTesters isEqualTo "") then {
-        _notesStr = _notesStr + "<font color='#5BD527' size='14.0'><h1>Author:</h1></font color><br/>" + _notesTesters + "<br/><br/>";
+    private _notesAuthor = GETMVAR(MissionNotes_Testers,"");
+    if !(_notesAuthor isEqualTo "") then {
+        _notesStr = _notesStr + "<font color='#5BD527' size='14.0'><h1>Author:</h1></font color><br/>" + _notesAuthor + "<br/><br/>";
     };
 
-    private _notesAuthor = GETMVAR(MissionNotes_Author,"");
-    if !(_notesAuthor isEqualTo "") then {
-        _notesStr = _notesStr + "<font color='#5BD527' size='14.0'><h1>Testers:</h1></font color><br/>" + _notesAuthor + "<br/><br/>";
+    private _notesTesters = GETMVAR(MissionNotes_Author,"");
+    if !(_notesTesters isEqualTo "") then {
+        _notesStr = _notesStr + "<font color='#5BD527' size='14.0'><h1>Testers:</h1></font color><br/>" + _notesTesters + "<br/><br/>";
     };
 
     private _notesConditions = GETMVAR(MissionNotes_Conditions,"");
@@ -438,6 +442,7 @@ if (GETMVAR(MissionNotes_Enable,false)) then {
     };
 
 };
+
 
 private _gamemastermsg = "";
 
