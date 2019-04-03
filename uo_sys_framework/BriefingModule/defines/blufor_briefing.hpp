@@ -126,7 +126,7 @@ if (GETMVAR(NATO_BLUFOR,false)) then {
 
     private _execTasks = GETMVAR(NATO_EXECUTION_Tasks_BLUFOR,"");
     if !(_execTasks isEqualTo "") then {
-        _execStr = _execStr + "<font color='#5BD527' size='14.0'><h1>Timings:</h1></font color><br/>" + _execTasks;
+        _execStr = _execStr + "<font color='#5BD527' size='14.0'><h1>Tasks:</h1></font color><br/>" + _execTasks;
     };
 
     if !(_execStr isEqualTo "") then {
@@ -144,12 +144,12 @@ if (GETMVAR(NATO_BLUFOR,false)) then {
 
     private _firesStr = GETMVAR(NATO_SANDS_SUPPORT_FIRES_BLUFOR,"");
     if !(_firesStr isEqualTo "") then {
-        _supportStr = _supportStr + "<font color='#5BD527' size='14.0'><h1>Timings:</h1></font color><br/>" + _firesStr + "<br/><br/>";
+        _supportStr = _supportStr + "<font color='#5BD527' size='14.0'><h1>Fires:</h1></font color><br/>" + _firesStr + "<br/><br/>";
     };
 
     private _ammoTasks = GETMVAR(NATO_SANDS_SUPPORT_AMMO_BLUFOR,"");
     if !(_ammoTasks isEqualTo "") then {
-        _supportStr = _supportStr + "<font color='#5BD527' size='14.0'><h1>Timings:</h1></font color><br/>" + _ammoTasks;
+        _supportStr = _supportStr + "<font color='#5BD527' size='14.0'><h1>Ammo:</h1></font color><br/>" + _ammoTasks;
     };
 
     if !(_supportStr isEqualTo "") then {
