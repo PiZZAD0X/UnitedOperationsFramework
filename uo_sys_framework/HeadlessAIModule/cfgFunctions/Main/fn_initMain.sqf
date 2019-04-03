@@ -1,7 +1,5 @@
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-AI_EXEC_CHECK(HC);
-
-if !(GETMVALUE(Enabled,false)) exitWith {};
+AI_EXEC_CHECK(SERVERHC);
 
 LOG("running fn_initMain");
 
@@ -12,14 +10,26 @@ GVAR(zoneEntities) = [];
 GVAR(templates) = [];
 GVAR(respawns) = [];
 GVAR(taskedGroups) = [];
-GVAR(functions) = [QGVAR(FastAirStrikeModule),QGVAR(AirDropModule),QGVAR(HeloInsertModule)];
-GVAR(zoneTypes) = [/*0*/["CAManBase","LandVehicle","Ship","Helicopter","Plane"],/*1*/["CAManBase","LandVehicle"],/*2*/["Helicopter","Plane"],/*3*/["CAManBase","LandVehicle","Helicopter"],/*4*/["CAManBase","LandVehicle","Ship"],/*5*/["CAManBase","LandVehicle","Plane"],/*6*/["Ship","Helicopter","Plane"],/*7*/["CAManBase"],/*8*/["LandVehicle"],/*9*/["Ship"],/*10*/["Helicopter"],/*11*/["Plane"]];
+GVAR(functions) = [];
+GVAR(zoneTypes) = [
+    ["CAManBase","LandVehicle","Ship","Helicopter","Plane"],
+    ["CAManBase","LandVehicle"],
+    ["Helicopter","Plane"],
+    ["CAManBase","LandVehicle","Helicopter"],
+    ["CAManBase","LandVehicle","Ship"],
+    ["CAManBase","LandVehicle","Plane"],
+    ["Ship","Helicopter","Plane"],
+    ["CAManBase"],
+    ["LandVehicle"],
+    ["Ship"],
+    ["Helicopter"],
+    ["Plane"]
+];
 GVAR(paradrop) = false;
 GVAR(zoneInit) = [];
 GVAR(templatesyncedObjects) = [];
 GVAR(templateCleanup) = false;
 GVAR(initialised) = true;
-
 GVAR(BasicCheckCurrent) = 0;
 GVAR(LeaderExecuteCurrent) = 0;
 
@@ -116,12 +126,12 @@ GVAR(FORCETIME_TIME) = 12;
 }] call CBA_fnc_waitUntilAndExecute;
 
 //leader/group behavior handling loop
-//[] spawn FUNC(MainLoop);
+[] spawn FUNC(MainLoop);
 
 if ((!hasinterface) && {(!isDedicated)}) then {
-    setViewDistance (missionNamespace getvariable [QGVAR(ViewDistance),2500]);
-    if (GVAR(FORCETIME_Enabled)) then {
-        private _timeForced = missionNamespace getvariable [QGVAR(FORCETIME_TIME),daytime];
+    setViewDistance (GETMVAR(AI_ViewDistance,2500));
+    if (GETMVAR(FORCETIME_Enabled,false)) then {
+        private _timeForced = (GETMVAR(FORCETIME_TIME,daytime));
         [{CBA_missionTime > 1},{
             GVAR(TimeForcedPFH) = [{
                 params ["_args", "_idPFH"];

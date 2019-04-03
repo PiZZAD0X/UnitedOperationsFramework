@@ -2,7 +2,9 @@
 AI_EXEC_CHECK(SERVERHC);
 
 params ["_args",["_initmode",false,[false]]];
-_args params [["_zone",objNull,[objNull]],["_entities",[],[[]]],["_delay",0,[0]],["_code",{},[{}]]];
+_args params [["_zone",objNull,[objNull]],["_entities",[],[[]]],["_delay",0,[0]],"_code"];
+
+LOG_2("CreateZone _args: %1 _initmode: %2",_args,_initmode);
 if !(_initmode) then {
     sleep _delay;
 };
@@ -29,20 +31,13 @@ _entities params [["_grps",[],[[]]],["_emptyvehs",[],[[]]],["_objs",[],[[]]]];
     } else {
         _vehicle call (_veh select 11);
     };
-    switch (_veh select 12) do {
-        case "OLSEN": {
-            LOG_2("Executing gear of file: %1 for vehicle %2",(_veh select 13),_vehicle);
-            [_vehicle,(_veh select 13)] call UO_FW_fnc_OlsenGearScript;
-        };
-        case "NONE": {};
-    };
 } forEach _emptyvehs;
 {
     private _obj = _x;
     private _object = createVehicle [(_obj select 0),(_obj select 1),[],0,"CAN_COLLIDE"];
     _object setVectorDirAndUp [_obj select 2,_obj select 3];
     _object setPosATL (_obj select 1);
-    _object setVariable["persistent",true,true];
+    _object setVariable ["persistent",true,true];
     _object setDamage (_obj select 4);
     if ((count (_obj select 6)) > 1) then {
         missionNamespace setVariable[(_obj select 6), _object];

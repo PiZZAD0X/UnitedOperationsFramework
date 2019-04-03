@@ -9,21 +9,18 @@
  *        suits & PiZZADOX & Lecks
  */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-AI_EXEC_CHECK(SERVERHC);
 
 params [["_mode","",[""]],["_input",[],[[]]]];
-    if (isNil QGVAR(initialised)) then {call FUNC(init);};
+    if (isNil QGVAR(initialised)) then {call FUNC(initMain);};
     switch _mode do {
         case "init": {
-            if !is3DEN then {
-                AI_EXEC_CHECK(SERVERHC);
-                _input params ["_logic",["_isActivated",true,[true]]];
-                if !(_isActivated) exitWith {};
-                if (count ([_logic ,[QGVAR(ZoneModule),QGVAR(ZoneModule_R)]] call FUNC(getSyncedModules)) > 0 ) then {
-                    _logic setVariable[QGVAR(taskZoneActivated),true];
-                };
-                [_logic] spawn FUNC(debugSyncedModules);
+            AI_EXEC_CHECK(SERVERHC);
+            _input params ["_logic",["_isActivated",true,[true]]];
+            if !(_isActivated) exitWith {};
+            if (count ([_logic ,[QGVAR(ZoneModule),QGVAR(ZoneModule_R)]] call FUNC(getSyncedModules)) > 0 ) then {
+                _logic setVariable[QGVAR(taskZoneActivated),true];
             };
+            [_logic] spawn FUNC(debugSyncedModules);
         };
         case "attributesChanged3DEN": {
             private _logic = _input param [0,objNull,[objNull]];

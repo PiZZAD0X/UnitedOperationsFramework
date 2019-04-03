@@ -1,4 +1,3 @@
-
 #include "cfgFSM.hpp"
 
 class EGVAR(AI,Module): EGVAR(Core,BaseModule) {

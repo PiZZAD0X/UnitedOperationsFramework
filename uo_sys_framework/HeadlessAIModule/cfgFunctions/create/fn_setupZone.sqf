@@ -1,9 +1,10 @@
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
 AI_EXEC_CHECK(SERVERHC);
 
-params ["_logic",["_delay",0,[0]],["_code",{},[{}]],["_initial",false],["_entitiesArray",[],[[]]]];
+params ["_logic",["_delay",0,[0]],"_code",["_initial",false],["_entitiesArray",[],[[]]]];
 private ["_entities"];
-LOG_1("setupZone started _logic: %1",_logic);
+LOG_2("setupZone started _logic: %1 _initmode: %2",_logic,_initial);
+
 if !(_initial) then {
     if ((tolower(typeOf _logic)) in [QGVAR(controlmodule), QGVAR(controlmodule_r)]) then {
         [_logic] spawn {
@@ -58,18 +59,32 @@ if !(_entities isEqualto []) then {
 //    };
 //};
 
-{
+private _syncedRespawn = ([_logic,[QGVAR(RespawnModule)]] call FUNC(getSyncedModules));
+private _syncedPosition = ([_logic,[QGVAR(PositionModule)]] call FUNC(getSyncedModules));
+private _syncedTemplate= ([_logic,[QGVAR(TemplateModule)]] call FUNC(getSyncedModules));
+
+if !(_syncedPosition isEqualto []) then {
+    LOG_2("_logic: %1 position getSyncedModules: %2",_logic,_syncedPosition);
     {
-        [[_x,(_x getVariable QGVAR(Template)),_delay,_code]] spawn FUNC(createZone);
-    } foreach ([_x,[QGVAR(TemplateModule)]] call FUNC(getSyncedModules));
-} foreach ([_logic,[QGVAR(PositionModule)]] call FUNC(getSyncedModules));
+        if !(_syncedTemplate isEqualTo []) then {
+            LOG_2("_logic: %1 template getSyncedModules: %2",_logic,_syncedTemplate);
+            {
+                [[_x,(_x getVariable QGVAR(Template)),_delay,_code]] spawn FUNC(createZone);
+            } foreach _syncedTemplate;
+        };
+    } foreach _syncedPosition;
+};
+
 //for "_p" from 0 to (count _posModules) step 1 do {
 //    private _tempModules = [(_posModules select _p),[QGVAR(TemplateModule)]] call FUNC(getSyncedModules);
 //    for "_t" from 0 to (count _tempModules) step 1 do {
 //        [(_tempModules select _t),((_tempModules select _t) getVariable QGVAR(Template)),_delay,{}] spawn FUNC(createZone);
 //    };
 //};
-{
-    _x spawn FUNC(setRespawn);
-} forEach ([_logic,[QGVAR(RespawnModule)]] call FUNC(getSyncedModules));
+if !(_syncedRespawn isEqualto []) then {
+    LOG_2("_logic: %1 respawn getSyncedModules: %2",_logic,_syncedRespawn);
+    {
+        _x spawn FUNC(setRespawn);
+    } forEach _syncedRespawn;
+};
 true

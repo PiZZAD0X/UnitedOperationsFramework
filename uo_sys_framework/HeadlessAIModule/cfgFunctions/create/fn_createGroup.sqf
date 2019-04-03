@@ -30,7 +30,7 @@ if (count _waypoints > 2) then {
     if (!(_tasks isEqualTo []) && {(_ngrp getVariable [QGVAR(TaskTimer),0]) isEqualTo 0}) then {
         [_ngrp,_tasks] call FUNC(taskInit);
     } else {
-        _ngrp setVariable[QGVAR(CurrentTaskEndTime),(CBA_MissionTime + _taskTimer)];
+        _ngrp setVariable [QGVAR(CurrentTaskEndTime),(CBA_MissionTime + _taskTimer)];
         private _passarray = [_task,_ngrp,_gpos,_taskRadius,_wait,_behave,_combat,_speed,_formation,_occupyOption];
         [{!((count waypoints (_this select 1)) isEqualto 0)},{
             _this call FUNC(taskAssign);

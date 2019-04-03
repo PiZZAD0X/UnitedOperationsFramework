@@ -1,5 +1,7 @@
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-EXEC_CHECK(ALL);
+AI_EXEC_CHECK(ALL);
+
+LOG("HC Global Pre Init");
 
 [] call FUNC(checkifHC);
 
@@ -18,7 +20,7 @@ EXEC_CHECK(ALL);
             params ["_firer","_AIunit","_revealValue"];
             _AIunit reveal [_firer,_revealValue];
             if (GETMVAR(MARKERS_Enabled,false)) then {
-                LOG_5("%1 got revealed to %2\n%3m, %4 seconds, %5 reveal value.",_firer,_x,_distance,_travelTime,_revealValue);
+                LOG_5("%1 got revealed to %2\n %3m, %4 seconds, %5 reveal value.",_firer,_x,_distance,_travelTime,_revealValue);
             };
         }, [_firer,_x,_revealValue], _travelTime] call CBA_fnc_waitAndExecute;
     };

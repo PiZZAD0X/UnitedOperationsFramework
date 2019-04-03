@@ -11,7 +11,7 @@ params [
     ["_speed","LIMITED",[""]],
     ["_formation","WEDGE",[""]],
     ["_Type","MOVE",[""]],
-    ["_oncomplete","this call FUNC(taskSearchNearby)",[""]],
+    ["_oncomplete",QUOTE(this call FUNC(taskSearchNearby)),[""]],
     ["_compradius",0,[0]],
     ["_wpcount",10,[0]],
     "_i"
@@ -21,19 +21,19 @@ params [
 _grp call CBA_fnc_clearWaypoints;
 _pos = [_pos,_grp] select (_pos isEqualTo []);
 _pos = _pos call CBA_fnc_getPos;
-_forwards = (vectorDir (leader _grp)) vectorMultiply _radius;
-_sideways = [_forwards select 1, -(_forwards select 0), 0];
-_poswp1 = _pos vectorAdd _sideways;
-_poswp2 = _poswp1 vectorAdd _forwards;
-_poswp4 = _pos vectorAdd (_sideways vectormultiply -1);
-_poswp3 = _poswp4 vectorAdd _forwards;
+private _forwards = (vectorDir (leader _grp)) vectorMultiply _radius;
+private _sideways = [_forwards select 1, -(_forwards select 0), 0];
+private _poswp1 = _pos vectorAdd _sideways;
+private _poswp2 = _poswp1 vectorAdd _forwards;
+private _poswp4 = _pos vectorAdd (_sideways vectormultiply -1);
+private _poswp3 = _poswp4 vectorAdd _forwards;
 {
-    _this1 =+ _this;
+    private _this1 =+ _this;
     _this1 set [1,_x];
     _this1 set [2,0];
     _this1 call FUNC(createWaypoint);
 } foreach [_poswp1,_poswp2,_poswp3,_poswp4];
-_this2 =+ _this;
+private _this2 =+ _this;
 _this2 set [1,_poswp1];
 _this2 set [2,0];
 _this2 set [8, "CYCLE"];

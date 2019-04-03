@@ -11,7 +11,7 @@ params [
     ["_speed","LIMITED",[""]],
     ["_formation","WEDGE",[""]],
     ["_Type","MOVE",[""]],
-    ["_oncomplete","this call FUNC(taskSearchNearby)",[""]],
+    ["_oncomplete",QUOTE(this call FUNC(taskSearchNearby)),[""]],
     ["_compradius",0,[0]],
     ["_wpcount",10,[0]]
 ];

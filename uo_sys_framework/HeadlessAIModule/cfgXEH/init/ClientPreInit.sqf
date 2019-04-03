@@ -1,5 +1,7 @@
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-EXEC_CHECK(CLIENTHC);
+AI_EXEC_CHECK(CLIENTHC);
+
+LOG("HC Client Pre Init");
 
 [QGVAR(ClientEvent), {
 

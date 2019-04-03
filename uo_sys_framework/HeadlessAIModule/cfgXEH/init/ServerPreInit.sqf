@@ -1,5 +1,7 @@
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-EXEC_CHECK(SERVER);
+AI_EXEC_CHECK(SERVER);
+
+LOG("HC Server Pre Init");
 
 [QGVAR(ServerEvent), {
 
@@ -9,6 +11,4 @@ EXEC_CHECK(SERVER);
 
 }] call CBA_fnc_addEventHandler;
 
-if (isNil QGVAR(HC_ID)) then {
-    [] call FUNC(initMain);
-};
+[] call FUNC(initMain);

@@ -11,7 +11,7 @@ params [
     ["_speed","LIMITED",[""]],
     ["_formation","WEDGE",[""]],
     ["_Type","MOVE",[""]],
-    ["_oncomplete","this call FUNC(taskSearchNearby)",[""]],
+    ["_oncomplete",QUOTE(this call FUNC(taskSearchNearby)),[""]],
     ["_compradius",0,[0]],
     ["_wpcount",10,[0]],
     "_i"
@@ -20,11 +20,11 @@ params [
 {_x forcespeed -1; _x enableAI "Path";} foreach units _grp;
 _grp call CBA_fnc_clearWaypoints;
 private _wp1pos = (_pos vectorAdd((vectorDir (leader _grp)) vectorMultiply _radius));
-_this1 =+ _this;
+private _this1 =+ _this;
 _this1 set [1, _wp1pos];
 _this1 call FUNC(createWaypoint);
 _this call FUNC(createWaypoint);
-_this2 =+ _this;
+private _this2 =+ _this;
 _this2 set [8, "CYCLE"];
 _this2 call FUNC(createWaypoint);
 

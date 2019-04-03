@@ -4,9 +4,11 @@
 AI_EXEC_CHECK(SERVERHC);
 
 GVAR(MARKERARRAY) = [];
-GVAR(TrackedUnits) = [];
+if (isNil QGVAR(TrackedUnits)) then {
+    GVAR(TrackedUnits) = [];
+};
 
-if !(GETMVAR(Markers_enabled,false)) exitWith {};
+if !(GETMVAR(MARKERS_Enabled,false)) exitwith {};
 GVAR(MapMarkersPFH) = [{
     {
         _x params ["_side","_group","_leader","_groupcount","_behaviourtasking","_behaviour","_target","_position","_hasRadio"];
@@ -128,4 +130,4 @@ GVAR(MapMarkersPFH) = [{
             };
         };
     } foreach GVAR(GroupArray);
-}, 120] call CBA_fnc_addPerFrameHandler;
+}, 0.1] call CBA_fnc_addPerFrameHandler;

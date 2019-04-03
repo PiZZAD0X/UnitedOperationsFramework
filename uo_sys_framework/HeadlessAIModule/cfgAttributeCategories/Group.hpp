@@ -143,7 +143,7 @@ class EGVAR(AI,GroupPopulate) {
             property = QEGVAR(AI,multiplier);
             control = QEGVAR(AI,multiplierControl);
             expression = ENTITY_EXPRESSION;
-            defaultValue = "1";
+            defaultValue = "0";
             typeName = "NUMBER";
             validate = "number";
         };

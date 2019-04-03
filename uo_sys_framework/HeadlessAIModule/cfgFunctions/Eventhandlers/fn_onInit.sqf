@@ -2,8 +2,8 @@
 AI_EXEC_CHECK(HC);
 
 if !(local _this) exitwith {};
-if (isNil QGVAR(ActiveList)) then {
-    GVAR(ActiveList) = [_this];
+if (isNil QGVAR(UnitQueue)) then {
+    GVAR(UnitQueue) = [_this];
 } else {
-    GVAR(ActiveList) append _this;
+    GVAR(UnitQueue) append [_this];
 };

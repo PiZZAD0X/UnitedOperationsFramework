@@ -9,18 +9,15 @@
  *        suits & PiZZADOX
  */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-AI_EXEC_CHECK(SERVERHC);
 
 params [["_mode","",[""]],["_input",[],[[]]]];
-    if (isNil QGVAR(initialised)) then {call FUNC(init);};
+    if (isNil QGVAR(initialised)) then {call FUNC(initMain);};
     switch _mode do {
         case "init": {
-            if !is3DEN then {
-                AI_EXEC_CHECK(SERVERHC);
-                _input params ["_logic",["_isActivated",true,[true]]];
-                if !(_isActivated) exitWith {};
-                [_logic] spawn FUNC(debugSyncedModules);
-            };
+            AI_EXEC_CHECK(SERVERHC);
+            _input params ["_logic",["_isActivated",true,[true]]];
+            if !(_isActivated) exitWith {};
+            [_logic] spawn FUNC(debugSyncedModules);
         };
         case "attributesChanged3DEN": {};
         case "registeredToWorld3DEN": {};
