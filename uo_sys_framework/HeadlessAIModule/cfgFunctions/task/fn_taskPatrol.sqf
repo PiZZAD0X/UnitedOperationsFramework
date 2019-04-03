@@ -1,28 +1,5 @@
-/*    Description: Task a group to patrol randomly in their patrol radius.
- *     Arguments:
- *         GROUP    - Group
- *         ARRAY    - Task Position
- *     Optional:
- *         NUMBER    - Task Radius
- *         NUMBER    - Wait Time at Waypoints
- *         STRING    - Behaviour
- *         STRING    - CombatMode
- *         STRING    - Speed
- *         STRING    - Formation
- *         STRING    - Waypoint Type
- *         STRING    - On Waypoint Complete Statement
- *         NUMBER    - Waypoint Complete Radius
- *        NUMBER    - Required Waypoint Amount
- *     Return Value:
- *         BOOL     - True
- *    Author:
- *        Rommel
- *    Modified
- *        suits & PiZZADOX
- */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
-
+AI_EXEC_CHECK(SERVERHC);
 
 params [
     "_grp",
@@ -34,7 +11,7 @@ params [
       ["_speed", "UNCHANGED", [""]],
     ["_formation", "NO CHANGE", [""]],
     ["_Type","MOVE",[""]],
-    ["_oncomplete","this call EFUNC(AI,taskSearchNearby)",[""]],
+    ["_oncomplete",QUOTE(this call FUNC(taskSearchNearby)),[""]],
     ["_compradius",0,[0]],
     ["_wpcount",10,[0]]
 ];
@@ -58,11 +35,11 @@ private _timeout = [(_wait*0.5),_wait,(_wait*1.5)];
 //_pos = [_pos,_grp] select (_pos isEqualTo []);
 //_pos = _pos call CBA_fnc_getPos;
 //for [{_i=0},{(_i < _wpcount)},{_i = _i + 1}] do {
-//    _wp = _this call EFUNC(AI,createWaypoint);
+//    _wp = _this call FUNC(createWaypoint);
 //};
 //_this2 =+ _this;
 //_this2 set [(count _this2), "CYCLE"];
-//_this2 call EFUNC(AI,createWaypoint);
+//_this2 call FUNC(createWaypoint);
 //deleteWaypoint ((waypoints _grp) select 0);
 
 _pos = [_pos, _grp] select (_pos isEqualTo []);
@@ -90,5 +67,5 @@ for "_i" from 1 to _wpcount do {
 [_grp,_pos,_radius,"CYCLE",_behaviour, _combat, _speed, _formation, _oncomplete, _timeout] call CBA_fnc_addWaypoint;
 
 _grp setvariable ["InitialWPSet",true];
-_grp setVariable ["UO_FW_AI_Mission","PATROLLING"];
+_grp setVariable [QGVAR(Mission),"PATROLLING"];
 true

@@ -1,5 +1,5 @@
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
 
 params [["_logic",objNull,[objNull]],["_marker","respawn_west",[""]]];
 {
@@ -19,5 +19,5 @@ params [["_logic",objNull,[objNull]],["_marker","respawn_west",[""]]];
     {
         private _unit = _x;
     } forEach (allUnits select {side _x isEqualTo _side});
-} forEach ([GETVAR(_logic,respawnside,0)] call EFUNC(AI,getSide));
+} forEach ([GETVAR(_logic,respawnside,0)] call FUNC(getSide));
 true

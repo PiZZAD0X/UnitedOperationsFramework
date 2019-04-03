@@ -5,6 +5,7 @@ if !(UO_FW_Server_HostageModule_Allowed) exitWith {};
 
 params ["_unit"];
 
+[QEGVAR(Core,RegisterModuleEvent), ["Hostage Control", "Allows the mission maker to easily add hostages to their missions.", "Starfox64, TrainDoctor and PiZZADOX"]] call CBA_fnc_globalEventJiP;
 LOG_1("Hostage set called on: %1!",_unit);
 
 private _marker = (GETVAR(_unit,Rescue_Location,"hostage_rescue"));
@@ -15,7 +16,6 @@ SETPVAR(_unit,IsRescued,false);
 
 [{(CBA_missionTime > 0)},{
     params ["_unit","_marker"];
-    [QEGVAR(Core,RegisterModuleEvent), ["Hostage Control", "Allows the mission maker to easily add hostages to their missions.", "Starfox64, TrainDoctor and PiZZADOX"]] call CBA_fnc_globalEventJiP;
 
     if (getMarkerColor _marker isEqualto "") exitwith {
         ERROR_1("hostage _marker: %1 does not exist!",_marker);
@@ -25,7 +25,7 @@ SETPVAR(_unit,IsRescued,false);
     _unit setBehaviour "CARELESS";
     _unit allowFleeing 0;
     _unit setCaptive true;
-    [_unit, "Acts_AidlPsitMstpSsurWnonDnon04", 1] remoteExecCall ["ace_common_fnc_doAnimation", _unit];
+    [_unit, "Acts_AidlPsitMstpSsurWnonDnon04", 1] call ace_common_fnc_doAnimation;
     _unit disableAI "MOVE";
 
     //IGNORE_PRIVATE_WARNING ["_thisID","_thisType"];
@@ -34,7 +34,7 @@ SETPVAR(_unit,IsRescued,false);
         if ((!alive _unit) || (GETVAR(_unit,IsRescued,false)) || (GETVAR(_unit,IsUntied,false))) exitWith {
             _unit removeEventHandler [_thisType, _thisID];
         };
-		    [_unit, "Acts_AidlPsitMstpSsurWnonDnon04", 1] remoteExecCall ["ace_common_fnc_doAnimation", _unit];
+        [_unit, "Acts_AidlPsitMstpSsurWnonDnon04", 1] call ace_common_fnc_doAnimation;
     }, []] call CBA_fnc_addBISEventHandler;
 
     SETVAR(_unit,EhAnimDone,_EhAnimDone);
@@ -49,7 +49,7 @@ SETPVAR(_unit,IsRescued,false);
             if ((vehicle _unit) isEqualto _unit) then {
                 [_unit] joinSilent grpNull;
                 _unit disableAI "MOVE";
-				        [_unit, "AmovPsitMstpSnonWnonDnon_ground", 1] remoteExecCall ["ace_common_fnc_doAnimation", _unit];
+                [_unit, "AmovPsitMstpSnonWnonDnon_ground", 1] call ace_common_fnc_doAnimation;
                 _unit disableAI "ANIM";
             };
             SETPVAR(_unit,IsRescued,true);

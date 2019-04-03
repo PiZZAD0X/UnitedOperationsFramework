@@ -1,13 +1,6 @@
-/*    Description: Returns an occupy setting for multiplied groups.
- *    Arguments:
- *         NUMBER    - Occupy Option
- *    Return Value:
- *         NUMBER     - New Occupy Option
- *    Author
- *        suits & PiZZADOX
- */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
+
 params ["_multiOccupy","_gx"];
 private _return = switch (_multiOccupy) do {
     case 1: {floor(_gx*0.25);};

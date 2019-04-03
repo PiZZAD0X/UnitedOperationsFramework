@@ -1,9 +1,5 @@
-//Heal any hurt friendlies nearby.
-//Potential for ace healing
-//_damageVar = player getvariable ["ace_medical_bodyPartStatus", [0,0,0,0,0,0]]; [player, "selection", (_damageVar select (["selection"] call ace_medical_fnc_selectionNameToNumber)) + _newDamage, player, "TypeOfDammage", -1] call ace_medical_fnc_handleDamage;
-
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
 
 private _Unitgroup = group _this;
 private _USide = side _Unitgroup;

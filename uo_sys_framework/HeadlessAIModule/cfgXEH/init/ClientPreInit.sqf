@@ -1,10 +1,12 @@
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-EXEC_CHECK(CLIENTHC);
+AI_EXEC_CHECK(CLIENTHC);
 
-["UO_FW_AI_Event", {
+LOG("HC Client Pre Init");
+
+[QGVAR(ClientEvent), {
 
 }] call CBA_fnc_addEventHandler;
 
 if !(hasInterface) then {
-    [] call EFUNC(AI,initMain);
+    [] call FUNC(initMain);
 };

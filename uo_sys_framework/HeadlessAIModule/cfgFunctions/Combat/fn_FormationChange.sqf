@@ -1,3 +1,6 @@
+#include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
+AI_EXEC_CHECK(SERVERHC);
+
 private ["_Unit", "_nearestCity", "_locationPos", "_nearestVillage", "_locationPos2", "_nearestHill", "_locationPos4", "_nearestLocal", "_locationPos3"];
 params ["_Unit","_VariableCheck"];
 

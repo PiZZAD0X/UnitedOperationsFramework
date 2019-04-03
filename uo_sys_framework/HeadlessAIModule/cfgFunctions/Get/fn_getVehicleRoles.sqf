@@ -1,19 +1,5 @@
-/*    Description: Returns array available roles/positions in a vehicle.
- *     Arguments:
- *         OBJECT     - Vehicle to Check
- *    Optional:
- *        STRING    - Specific Role
- *     Return Value:
- *         ARRAY    - Vehicle Roles
- *            ALL ROLES
- *                [["turret",[[0],[1]]]"commander","driver","cargo","cargo","cargo"];
- *            SELECT ROLES
- *                ["turret",[[0],[1]]]
- *                ["driver"]
- *                ["cargo","cargo","cargo"]
- */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
 
 params["_veh",["_role","",[""]]];
 private _roles = [];

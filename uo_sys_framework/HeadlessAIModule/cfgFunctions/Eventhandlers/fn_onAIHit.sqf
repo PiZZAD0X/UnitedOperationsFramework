@@ -1,12 +1,13 @@
-//Function that executes on AI when they are hit.
+#include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
+AI_EXEC_CHECK(SERVERHC);
 
 params ["_Unit"];
 if (isPlayer _Unit) exitWith {};
 if !((vehicle _Unit) isEqualTo _Unit) exitWith {};
 
 //If the unit got hit recently, ignore this.
-if (_Unit getVariable ["UO_FW_AI_GHit",false]) exitWith {};
-_Unit setVariable ["UO_FW_AI_GHit",true];
+if (_Unit getVariable [QGVAR(GHit),false]) exitWith {};
+_Unit setVariable [QGVAR(GHit),true];
 _Unit setUnitPos "DOWN";
 private _unCon = false;
 if ((random 100) < 5) then {
@@ -15,7 +16,7 @@ if ((random 100) < 5) then {
 };
 [{
     params ["_Unit","_unCon"];
-    _Unit setVariable ["UO_FW_AI_GHit",false];
+    _Unit setVariable [QGVAR(GHit),false];
     _Unit setUnitPos "AUTO";
     if (_unCon) then {
         _Unit setUnconscious false;

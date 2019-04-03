@@ -1,3 +1,6 @@
+#include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
+AI_EXEC_CHECK(SERVERHC);
+
 private ["_Unit", "_MovePosition", "_NearestEnemy", "_TypeListFinal", "_TypeList", "_Type", "_Type", "_BoundingArray", "_p1", "_p2", "_maxWidth", "_maxLength", "_maxHeight", "_ClosestCover", "_GuessLocation", "_coverObjectspos","_WeakListFinal","_MovePos"];
 params ["_Unit","_MovePos","_GARRISONED","_MovedRecentlyCover","_ActivelyClearing","_StartedInside","_NearestEnemy"];
 
@@ -39,7 +42,7 @@ private _Roads = _MovePosition nearRoads 30;
 
 
 if (_TypeListFinal isEqualTo [] && _WeakListFinal isEqualTo []) exitWith {};
-//_ClosestCover = [_TypeListFinal,_this] call EFUNC(AI,ClosestObject);
+//_ClosestCover = [_TypeListFinal,_this] call FUNC(ClosestObject);
 if !(_TypeListFinal isEqualTo []) then {_ClosestCover = _TypeListFinal call BIS_fnc_selectRandom;} else {_ClosestCover = _WeakListFinal call BIS_fnc_selectRandom;};
 
 

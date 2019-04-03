@@ -1,18 +1,7 @@
-/*    Description: Creates debug marker at given location.
- *     Arguments:
- *         GROUP    - Group Marker Relates To
- *         ARRAY    - Marker Position
- *         STRING    - Marker Text
- *     Optional:
- *         STRING    - Marker Color
- *     Return Value:
- *         BOOL    - True
- *    Author
- *        suits & PiZZADOX
- */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
-if !(UO_FW_AI_DEBUG) exitwith {};
+AI_EXEC_CHECK(SERVERHC);
+
+if !(GETMVAR(Debug,false)) exitwith {};
 
 params ["_grp",["_pos",[0,0,0],[[]]],["_text","",[""]],["_markerColor","ColorBLUFOR",[""]],["_markerShape","ICON",[""]],["_markerAlpha",1,[0]],["_markerType","b_unknown",[""]]];
 private _count = (leader _grp) getvariable["debugMarker",0];

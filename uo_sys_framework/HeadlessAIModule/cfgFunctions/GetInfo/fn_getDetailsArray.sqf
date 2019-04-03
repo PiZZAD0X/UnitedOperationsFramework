@@ -1,14 +1,6 @@
-/*    Description: Looksup class name and returns array selector.
- *     Arguments:
- *         CLASSNAME    - Variable to lookup
- *         ARRAY        - Array to lookup
- *         Optional:
- *            NUMBER     - Selection to make in Array.
- *     Return Value:
- *         NUMBER         - Array Selector
- */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
+
 params [
     "_classname",
     "_array",

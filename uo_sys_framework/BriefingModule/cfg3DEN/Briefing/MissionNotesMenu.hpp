@@ -1,6 +1,6 @@
 class EGVAR(Briefing,MissionNotes) {
     displayName = "Mission Notes";
-    collapsed = 1;
+    collapsed = 0;
     class Attributes {
         class EGVAR(Briefing,MissionNotes_Enable) {
             property = QEGVAR(Briefing,MissionNotes_Enable);
@@ -9,7 +9,6 @@ class EGVAR(Briefing,MissionNotes) {
             control = "CheckboxState";
             expression = SCENARIO_EXPRESSION;
             defaultValue = "false";
-
         };
         class EGVAR(Briefing,MissionNotes_Author) {
             property = QEGVAR(Briefing,MissionNotes_Author);

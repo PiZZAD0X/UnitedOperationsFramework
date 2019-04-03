@@ -1,29 +1,5 @@
-/* ----------------------------------------------------------------------------
-Function: CBA_fnc_searchNearby
-
-Description:
-    A function for a group to search a nearby building.
-
-Parameters:
-    - Group (Group or Object)
-
-Example:
-    (begin example)
-    [group player] call CBA_fnc_searchNearby
-    (end)
-
-Returns:
-    Nil
-
-Author:
-    Rommel, SilentSpike
-
-Modified:
-    suits and PiZZADOX (removed _group setBehaviour "Combat"; under Prepare group to search)
----------------------------------------------------------------------------- */
-
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
 
 params ["_group"];
 
@@ -37,7 +13,7 @@ if !(local _group) exitWith {};
 _group = _group call CBA_fnc_getGroup;
 if !(local _group) exitWith {}; // Don't create waypoints on each machine
 
-private _otask = _group getvariable ["UO_FW_AI_Mission","NONE"];
+private _otask = _group getvariable [QGVAR(Mission),"NONE"];
 
 [_group,_building,_otask] spawn {
     params ["_group","_building","_otask"];
@@ -45,7 +21,7 @@ private _otask = _group getvariable ["UO_FW_AI_Mission","NONE"];
 
         {_x forcespeed -1; _x enableAI "Path";} foreach units _group;
         _group setvariable ["InitialWPSet",true];
-        _group setVariable ["UO_FW_AI_Mission","BLD SEARCH"];
+        _group setVariable [QGVAR(Mission),"BLD SEARCH"];
 
     // Add a waypoint to regroup after the search
     _group lockWP true;
@@ -76,5 +52,5 @@ private _otask = _group getvariable ["UO_FW_AI_Mission","NONE"];
         };
 
     _group lockWP false;
-    _group setVariable ["UO_FW_AI_Mission",_otask];
+    _group setVariable [QGVAR(Mission),_otask];
 };

@@ -1,18 +1,5 @@
-/*    Description: Task a group to hold position until contact with enemy.
- *     Arguments:
- *         GROUP    - Group
- *     Optional:
- *         STRING    - Behaviour
- *         STRING    - CombatMode
- *         STRING    - Speed
- *         STRING    - Formation
- *     Return Value:
- *         BOOL     - True
- */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
-
-
+AI_EXEC_CHECK(SERVERHC);
 
 params [
     "_grp",
@@ -24,7 +11,7 @@ params [
     ["_speed","LIMITED",[""]],
     ["_formation","WEDGE",[""]],
     ["_Type","MOVE",[""]],
-    ["_oncomplete","this call EFUNC(AI,taskSearchNearby)",[""]],
+    ["_oncomplete",QUOTE(this call FUNC(taskSearchNearby)),[""]],
     ["_compradius",0,[0]],
     ["_wpcount",10,[0]]
 ];
@@ -42,5 +29,5 @@ for "_i" from 0 to (count _units) do {
     doStop _u;
 };
 _grp setvariable ["InitialWPSet",true];
-_grp setVariable ["UO_FW_AI_Mission","HOLD"];
+_grp setVariable [QGVAR(Mission),"HOLD"];
 true

@@ -1,5 +1,5 @@
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
 
 //unit 1, unit 2
 params ["_unit","_target"];
@@ -15,6 +15,6 @@ _getposTarget = getposASL _target;
 _eyeP2 = [_getposTarget select 0, _getposTarget select 1,(_getposTarget select 2) + 1];
 
 _cansee = [_unit, "VIEW", objNull] checkVisibility [eyepos _unit, _eyeP2];
-if (_cansee > UO_FW_AI_Bunker_ViewThreshold) then {_canseeReturn = true;};
+if (_cansee > GVAR(Bunker_ViewThreshold)) then {_canseeReturn = true;};
 
 _canseeReturn

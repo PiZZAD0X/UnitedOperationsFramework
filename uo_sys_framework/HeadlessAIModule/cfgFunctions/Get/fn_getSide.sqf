@@ -1,11 +1,6 @@
-/*    Description: Zone module side detection selection.
- *    Arguments:
- *         NUMBER    - For corresponding side array
- *     Return Value:
- *         ARRAY     - Sides
- */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
+
 params [["_select",0,[0]],["_side",[],[[]]]];
 switch (_select) do {
     case 0: { _side = [WEST]; };

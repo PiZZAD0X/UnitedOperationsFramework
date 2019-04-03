@@ -1,15 +1,6 @@
-/*    Description: Used for replicating a squads position relative to the squad leader.
- *     Arguments:
- *         ARRAY    - New Group Position
- *         OBJECT    - Group leader to base positions off
- *        OBJECT    - Unit to find new position for
- *     Return Value:
- *         ARRAY     - New Position for Unit
- *    Author
- *        suits & PiZZADOX
- */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
+
 params ["_newPos","_grpldr","_unit",["_pos",[],[[]]]];
 private _grpPos = getPosATL _grpldr;
 private _unitPos = getpos _unit;

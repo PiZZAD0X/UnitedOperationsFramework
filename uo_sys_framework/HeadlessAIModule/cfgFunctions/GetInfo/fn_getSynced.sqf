@@ -1,13 +1,6 @@
-/*    Description: Gets all synced objects, vehicles and units to a module. Including passengers or units in vehicles.
- *    Arguments:
- *         ARRAY    - Module (name, _logic)
- *    Return Value:
- *         ARRAY     - Entities linked to object
- *    Author
- *        suits & PiZZADOX
- */
 #include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
-UO_FW_AI_EXEC_CHECK(SERVERHC);
+AI_EXEC_CHECK(SERVERHC);
+
 params ["_logic"];
 private _synced = synchronizedObjects _logic;
 {

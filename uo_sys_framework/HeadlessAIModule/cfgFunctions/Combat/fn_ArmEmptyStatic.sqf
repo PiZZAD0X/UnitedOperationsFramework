@@ -1,4 +1,7 @@
-if (UO_FW_AI_STATICGARRISON isEqualTo 0) exitWith {};
+#include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
+AI_EXEC_CHECK(SERVERHC);
+
+if (GVAR(STATICGARRISON) isEqualTo 0) exitWith {};
 private _Unit = _this;
 private _Position = getPosATL _Unit;
 

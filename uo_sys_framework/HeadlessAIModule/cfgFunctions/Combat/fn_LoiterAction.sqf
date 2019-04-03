@@ -1,3 +1,6 @@
+#include "\x\UO_FW\addons\Main\HeadlessAIModule\module_macros.hpp"
+AI_EXEC_CHECK(SERVERHC);
+
 /*
 Snippet of Code from Genesis92x the author of VCOM, modified by crewt & PiZZADOX
 */
@@ -19,14 +22,14 @@ while {((behaviour _unit ) != "COMBAT") && ((behaviour _unit ) != "STEALTH") && 
         _unit doMove _pos;
         Waituntil {sleep 4; unitReady _unit;};
     };
-    _CurrentAction = _unit  getVariable ["UO_FW_AI_LOITERINGACT",0];
+    _CurrentAction = _unit  getVariable [QGVAR(LOITERINGACT),0];
     if (((behaviour _unit) == "COMBAT") || ((behaviour _unit) == "AWARE") || ((behaviour _unit) == "STEALTH")) then {  breakOut "SAFE_Loop1";};
     _RandomAction = selectRandom ([1,3,4] - [_CurrentAction]);
     switch (_RandomAction) do {
         case 1: {
             //Wander around and play random animation
             //Get random position
-            _unit  setVariable ["UO_FW_AI_LOITERINGACT", 1];
+            _unit  setVariable [QGVAR(LOITERINGACT), 1];
             _rnd = random 10;
             _dist = (_rnd + 5);
             _dir = random 360;
@@ -52,9 +55,9 @@ while {((behaviour _unit ) != "COMBAT") && ((behaviour _unit ) != "STEALTH") && 
 
         case 3: {
             if (!(alive _unit ))exitWith {};
-            _unit  setVariable ["UO_FW_AI_LOITERINGACT",3];
-            _ClosestUnit = [(_UnitGroup - [_unit ]),_unit ] call EFUNC(AI,ClosestObject);
-            _ClosestUnit setVariable ["UO_FW_AI_LOITERINGACT",3];
+            _unit  setVariable [QGVAR(LOITERINGACT),3];
+            _ClosestUnit = [(_UnitGroup - [_unit ]),_unit ] call FUNC(ClosestObject);
+            _ClosestUnit setVariable [QGVAR(LOITERINGACT),3];
             if (((behaviour _unit) == "COMBAT") || ((behaviour _unit) == "AWARE") || ((behaviour _unit) == "STEALTH")) then {  breakOut "SAFE_Loop1";};
             _rnd = random 10;
             _dist = (_rnd + 5);
@@ -112,7 +115,7 @@ while {((behaviour _unit ) != "COMBAT") && ((behaviour _unit ) != "STEALTH") && 
         case 4: {
             //Wander around and sitdown
             //Get random position
-            _unit  setVariable ["UO_FW_AI_LOITERINGACT",4];
+            _unit  setVariable [QGVAR(LOITERINGACT),4];
             _rnd = random 10;
             _dist = (_rnd + 5);
             _dir = random 360;
