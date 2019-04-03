@@ -404,6 +404,8 @@ if (GETMVAR(Appendix_BLUFOR,false)) then {
 
 if (GETMVAR(MissionNotes_Enable,false)) then {
     //Mission Notes
+    private _notesStr = "";
+
     private _notesTesters = GETMVAR(MissionNotes_Testers,"");
     if !(_notesTesters isEqualTo "") then {
         _notesStr = _notesStr + "<font color='#5BD527' size='14.0'><h1>Author:</h1></font color><br/>" + _notesTesters + "<br/><br/>";
